@@ -6,7 +6,7 @@ package com.mycompany.appclinica.Models;
 
 /**
  *
- * @author Samuel Castaño, HéctorJulián Ospina
+ * @author Samuel Castaño Arenas, Héctor Julián Ospina
  */
 
 import java.time.LocalDate;
