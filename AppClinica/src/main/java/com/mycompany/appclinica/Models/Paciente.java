@@ -26,7 +26,7 @@ public class Paciente {
     private String apellido;
     private String telefono;
     private LocalDate fechaNacimiento;
-    private List<Cita> citas;
+    private final List<Cita> citas;
 
     /**
      * Constructor completo de Paciente.

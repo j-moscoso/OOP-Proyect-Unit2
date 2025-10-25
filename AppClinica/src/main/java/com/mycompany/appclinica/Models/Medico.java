@@ -24,7 +24,7 @@ public class Medico {
     private String apellido;
     private EnumEspecialidad especialidad;
     private String telefono;
-    private List<Cita> citas;
+    private final List<Cita> citas;
 
     /**
      * Constructor completo de Medico.
