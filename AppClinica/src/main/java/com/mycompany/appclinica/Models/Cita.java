@@ -199,7 +199,7 @@ public class Cita {
         return "Cita ID: " + id + "\n"
                 + "Paciente: " + (paciente != null ? paciente.getNombreCompleto() + " (CC: " + paciente.getCedula() + ")" : "No asignado") + "\n"
                 + "Médico: " + (medico != null ? medico.getNombreCompleto() + " (CC: " + medico.getCedula() + ")" : "No asignado") + "\n"
-                + "Especialidad: " + (medico != null ? medico.getEnumEspecialidad() : "N/A") + "\n"
+                + "Especialidad: " + (medico != null ? medico.getEspecialidad() : "N/A") + "\n"
                 + "Fecha: " + getFechaProgramada() + "\n"
                 + "Motivo: " + motivo + "\n"
                 + "Estado: " + estado.toString();
