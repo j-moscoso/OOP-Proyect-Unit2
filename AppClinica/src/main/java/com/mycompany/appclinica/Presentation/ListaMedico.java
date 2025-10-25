@@ -8,12 +8,12 @@ package com.mycompany.appclinica.Presentation;
  *
  * @author Slleider
  */
-public class ListaPacientes extends javax.swing.JInternalFrame {
+public class ListaMedico extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form ListaPacientes
      */
-    public ListaPacientes() {
+    public ListaMedico() {
         initComponents();
     }
 
@@ -28,14 +28,14 @@ public class ListaPacientes extends javax.swing.JInternalFrame {
 
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        labelPacientes = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        labelMedicos = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tableDatosPaciente = new javax.swing.JTable();
+        tableDatosMedicos = new javax.swing.JTable();
         buttonCrear = new javax.swing.JButton();
         buttonBuscar = new javax.swing.JButton();
         buttonRefresacar = new javax.swing.JButton();
         buttonEliminar = new javax.swing.JButton();
-        buttonVerCitas = new javax.swing.JButton();
         buttonEditar = new javax.swing.JButton();
         textFieldBuscar = new javax.swing.JTextField();
 
@@ -43,11 +43,13 @@ public class ListaPacientes extends javax.swing.JInternalFrame {
         jTextArea1.setRows(5);
         jScrollPane2.setViewportView(jTextArea1);
 
-        labelPacientes.setFont(new java.awt.Font("Microsoft Tai Le", 1, 18)); // NOI18N
-        labelPacientes.setText("Pacientes");
+        jLabel1.setText("jLabel1");
 
-        tableDatosPaciente.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
-        tableDatosPaciente.setModel(new javax.swing.table.DefaultTableModel(
+        labelMedicos.setFont(new java.awt.Font("Microsoft Tai Le", 1, 18)); // NOI18N
+        labelMedicos.setText("Médicos");
+
+        tableDatosMedicos.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
+        tableDatosMedicos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -55,10 +57,10 @@ public class ListaPacientes extends javax.swing.JInternalFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Cédula", "Nombre", "Apellido", "Teléfono", "Fecha de Nacimiento"
+                "Cédula", "Nombre", "Apellido", "Teléfono", "Especialidad"
             }
         ));
-        jScrollPane1.setViewportView(tableDatosPaciente);
+        jScrollPane1.setViewportView(tableDatosMedicos);
 
         buttonCrear.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         buttonCrear.setText("Crear");
@@ -93,14 +95,6 @@ public class ListaPacientes extends javax.swing.JInternalFrame {
             }
         });
 
-        buttonVerCitas.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
-        buttonVerCitas.setText("Ver Citas");
-        buttonVerCitas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonVerCitasActionPerformed(evt);
-            }
-        });
-
         buttonEditar.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         buttonEditar.setText("Editar");
 
@@ -120,26 +114,20 @@ public class ListaPacientes extends javax.swing.JInternalFrame {
                 .addContainerGap(28, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(textFieldBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 677, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(labelPacientes)
-                                        .addGap(479, 479, 479))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(buttonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(buttonCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(buttonRefresacar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(buttonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(buttonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(buttonVerCitas, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(buttonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(buttonRefresacar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(buttonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(buttonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(labelMedicos, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(buttonCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(30, 30, 30))
         );
         layout.setVerticalGroup(
@@ -147,21 +135,21 @@ public class ListaPacientes extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelPacientes)
+                    .addComponent(labelMedicos)
                     .addComponent(buttonCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buttonBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(buttonRefresacar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(textFieldBuscar))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(textFieldBuscar, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(buttonBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(buttonRefresacar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buttonVerCitas, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonEditar, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE))
-                .addGap(21, 21, 21))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(buttonEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                    .addComponent(buttonEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(23, 23, 23))
         );
 
         pack();
@@ -183,10 +171,6 @@ public class ListaPacientes extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_buttonEliminarActionPerformed
 
-    private void buttonVerCitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonVerCitasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buttonVerCitasActionPerformed
-
     private void textFieldBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldBuscarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textFieldBuscarActionPerformed
@@ -198,12 +182,12 @@ public class ListaPacientes extends javax.swing.JInternalFrame {
     private javax.swing.JButton buttonEditar;
     private javax.swing.JButton buttonEliminar;
     private javax.swing.JButton buttonRefresacar;
-    private javax.swing.JButton buttonVerCitas;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JLabel labelPacientes;
-    private javax.swing.JTable tableDatosPaciente;
+    private javax.swing.JLabel labelMedicos;
+    private javax.swing.JTable tableDatosMedicos;
     private javax.swing.JTextField textFieldBuscar;
     // End of variables declaration//GEN-END:variables
 }
