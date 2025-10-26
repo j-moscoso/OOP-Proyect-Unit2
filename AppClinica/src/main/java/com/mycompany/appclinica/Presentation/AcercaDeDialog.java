@@ -46,28 +46,38 @@ public class AcercaDeDialog extends javax.swing.JDialog {
         labelAutores.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         labelAutores.setText("Autores:");
 
-        autor1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        autor1.setFont(new java.awt.Font("Microsoft Tai Le", 1, 18)); // NOI18N
+        autor1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         autor1.setText("Juan Manuel Moscoso Torres");
+        autor1.setToolTipText("");
 
-        autor2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        autor2.setFont(new java.awt.Font("Microsoft Tai Le", 1, 18)); // NOI18N
+        autor2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         autor2.setText("Slleider David Rojas Aleman");
+        autor2.setToolTipText("");
 
-        autor3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        autor3.setFont(new java.awt.Font("Microsoft Tai Le", 1, 18)); // NOI18N
+        autor3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         autor3.setText("Samuel Castaño Arenas");
+        autor3.setToolTipText("");
 
-        autor4.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        autor4.setFont(new java.awt.Font("Microsoft Tai Le", 1, 18)); // NOI18N
+        autor4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         autor4.setText("Alejandro Toro Bueno");
+        autor4.setToolTipText("");
 
-        autor5.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        autor5.setFont(new java.awt.Font("Microsoft Tai Le", 1, 18)); // NOI18N
+        autor5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         autor5.setText("Héctor Julian Ospina");
+        autor5.setToolTipText("");
 
         textDescripcion.setColumns(20);
-        textDescripcion.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        textDescripcion.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         textDescripcion.setRows(5);
         textDescripcion.setText("Aplicación de escritorio para gestionar \nlas consultas médicas en una clínica. \nPermitiendo registrar pacientes, médicos, \nespecialidades, agendar citas, y llevar un \nhistorial básico de consultas.");
         jScrollPane1.setViewportView(textDescripcion);
 
-        buttonCerrar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        buttonCerrar.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         buttonCerrar.setText("Cerrar");
         buttonCerrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -80,42 +90,45 @@ public class AcercaDeDialog extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(labelAutores)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(autor1))
+                        .addGap(119, 119, 119)
+                        .addComponent(labelAppClinica))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(84, 84, 84)
-                        .addComponent(autor2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(84, 84, 84)
-                        .addComponent(autor3))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(84, 84, 84)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(labelAppClinica)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(209, 209, 209)
-                        .addComponent(buttonCerrar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(84, 84, 84)
+                        .addGap(17, 17, 17)
+                        .addComponent(labelAutores, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(autor5)
-                            .addComponent(autor4))))
-                .addContainerGap(99, Short.MAX_VALUE))
+                            .addComponent(autor1)
+                            .addComponent(autor2)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(autor4)
+                                    .addComponent(autor3)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(6, 6, 6)
+                                        .addComponent(autor5)))))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 109, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(buttonCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(207, 207, 207))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(100, 100, 100))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(17, 17, 17)
                 .addComponent(labelAppClinica, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelAutores)
-                    .addComponent(autor1))
+                    .addComponent(autor1)
+                    .addComponent(labelAutores, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(autor2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -124,11 +137,11 @@ public class AcercaDeDialog extends javax.swing.JDialog {
                 .addComponent(autor4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(autor5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(buttonCerrar)
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addGap(33, 33, 33)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
+                .addComponent(buttonCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15))
         );
 
         pack();
