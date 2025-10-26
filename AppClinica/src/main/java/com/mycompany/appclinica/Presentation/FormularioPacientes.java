@@ -24,6 +24,16 @@ public class FormularioPacientes extends javax.swing.JInternalFrame {
         this.pacienteService = pacienteService;
         this.paciente = paciente;
         initComponents();
+        if (paciente != null) {
+            txtCedula.setEditable(false);
+            txtCedula.setText(paciente.getCedula());
+            txtNombre.setText(paciente.getNombre());
+            txtApellido.setText(paciente.getApellido());
+            txtTelefono.setText(paciente.getTelefono());
+            txtFechaNacimiento.setText(paciente.getFechaNacimiento() != null 
+                ? paciente.getFechaNacimiento().toString() 
+                : "");
+        }
     }
 
     /**
@@ -208,7 +218,10 @@ public class FormularioPacientes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-        txtCedula.setText("");
+        if (paciente == null) {
+        txtCedula.setText("");  // Solo borra la cédula si estás creando un paciente nuevo
+        txtCedula.setEditable(true); // Y asegúrate de habilitar la edición solo en este caso
+    }
         txtNombre.setText("");
         txtApellido.setText("");
         txtTelefono.setText("");

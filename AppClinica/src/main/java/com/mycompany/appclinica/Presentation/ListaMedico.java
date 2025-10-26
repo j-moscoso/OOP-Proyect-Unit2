@@ -4,7 +4,13 @@
  */
 package com.mycompany.appclinica.Presentation;
 
+import com.mycompany.appclinica.Models.Medico;
 import com.mycompany.appclinica.Services.MedicoService;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -42,6 +48,7 @@ public class ListaMedico extends javax.swing.JInternalFrame {
         buttonEditar = new javax.swing.JButton();
         textFieldBuscar = new javax.swing.JTextField();
         jButtonSalir3 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -101,9 +108,13 @@ public class ListaMedico extends javax.swing.JInternalFrame {
 
         buttonEditar.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         buttonEditar.setText("Editar");
+        buttonEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonEditarActionPerformed(evt);
+            }
+        });
 
         textFieldBuscar.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
-        textFieldBuscar.setText("Buscar");
         textFieldBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textFieldBuscarActionPerformed(evt);
@@ -117,6 +128,9 @@ public class ListaMedico extends javax.swing.JInternalFrame {
                 jButtonSalir3ActionPerformed(evt);
             }
         });
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel2.setText("Ingrese la cédula:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -136,7 +150,10 @@ public class ListaMedico extends javax.swing.JInternalFrame {
                             .addComponent(buttonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(18, 18, 18)
                             .addComponent(buttonEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(buttonCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel2)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(buttonCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addComponent(labelMedicos, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -154,7 +171,9 @@ public class ListaMedico extends javax.swing.JInternalFrame {
                         .addContainerGap()
                         .addComponent(jButtonSalir3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addComponent(buttonCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(buttonCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(textFieldBuscar, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -180,15 +199,62 @@ public class ListaMedico extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonCrearActionPerformed
 
     private void buttonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBuscarActionPerformed
-        // TODO add your handling code here:
+        String texto = textFieldBuscar.getText().trim();
+        List<Medico> resultados;
+
+        if (texto.matches("\\d+")) {
+            // Si es solo números, buscar por cédula
+            Optional<Medico> m = medicoService.buscarPorCedula(texto);
+            resultados = new ArrayList<>();
+            if (m.isPresent()) {
+                resultados.add(m.get());
+            }
+        } else {
+            // Sino buscar por nombre
+            resultados = medicoService.buscarPorNombre(texto);
+        }
+
+        DefaultTableModel model = (DefaultTableModel) tableDatosMedicos.getModel();
+        model.setRowCount(0);
+
+        for (Medico m : resultados) {
+            model.addRow(new Object[]{
+                m.getCedula(),
+                m.getNombre(),
+                m.getApellido(),
+                m.getTelefono(),
+                m.getEspecialidad()
+            });
+        }
     }//GEN-LAST:event_buttonBuscarActionPerformed
 
     private void buttonRefresacarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRefresacarActionPerformed
-        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) tableDatosMedicos.getModel();
+        model.setRowCount(0);
+
+        List<Medico> todosMedicos = medicoService.listarTodos();
+
+        for (Medico m : todosMedicos) {
+            model.addRow(new Object[]{
+                m.getCedula(),
+                m.getNombre(),
+                m.getApellido(),
+                m.getTelefono(),
+                m.getEspecialidad()
+            });
+        }
     }//GEN-LAST:event_buttonRefresacarActionPerformed
 
     private void buttonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEliminarActionPerformed
-        // TODO add your handling code here:
+        int fila = tableDatosMedicos.getSelectedRow();
+        if (fila != -1) {
+            String cedula = (String) tableDatosMedicos.getValueAt(fila, 0);
+            medicoService.eliminarMedico(cedula);
+            JOptionPane.showMessageDialog(this, "Medico eliminado");
+            buttonRefresacarActionPerformed(evt);
+        } else {
+            JOptionPane.showMessageDialog(this, "Seleccione un medico para eliminar");
+        }
     }//GEN-LAST:event_buttonEliminarActionPerformed
 
     private void textFieldBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldBuscarActionPerformed
@@ -196,8 +262,23 @@ public class ListaMedico extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_textFieldBuscarActionPerformed
 
     private void jButtonSalir3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalir3ActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_jButtonSalir3ActionPerformed
+
+    private void buttonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditarActionPerformed
+        int fila = tableDatosMedicos.getSelectedRow();
+        if (fila != -1) {
+            String cedula = (String) tableDatosMedicos.getValueAt(fila, 0);
+            Optional<Medico> m = medicoService.buscarPorCedula(cedula);
+            if (m.isPresent()) {
+                FormulariosMedicos formulario = new FormulariosMedicos(medicoService, m.get());
+                getParent().add(formulario);
+                formulario.setVisible(true);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Seleccione un medico para editar");
+        }
+    }//GEN-LAST:event_buttonEditarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -208,6 +289,7 @@ public class ListaMedico extends javax.swing.JInternalFrame {
     private javax.swing.JButton buttonRefresacar;
     private javax.swing.JButton jButtonSalir3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;

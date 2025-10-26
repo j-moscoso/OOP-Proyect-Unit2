@@ -4,7 +4,13 @@
  */
 package com.mycompany.appclinica.Presentation;
 
+import com.mycompany.appclinica.Models.Paciente;
 import com.mycompany.appclinica.Services.PacienteService;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -51,6 +57,7 @@ public class ListaPaciente extends javax.swing.JInternalFrame {
         tableDatosPaciente = new javax.swing.JTable();
         buttonEliminar2 = new javax.swing.JButton();
         jButtonSalir = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         labelMedicos.setFont(new java.awt.Font("Microsoft Tai Le", 1, 18)); // NOI18N
         labelMedicos.setText("Médicos");
@@ -197,9 +204,13 @@ public class ListaPaciente extends javax.swing.JInternalFrame {
 
         buttonEditar2.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         buttonEditar2.setText("Editar");
+        buttonEditar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonEditar2ActionPerformed(evt);
+            }
+        });
 
         textFieldBuscar2.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
-        textFieldBuscar2.setText("Buscar");
         textFieldBuscar2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textFieldBuscar2ActionPerformed(evt);
@@ -236,6 +247,9 @@ public class ListaPaciente extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel1.setText("Ingrese la cédula:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -253,10 +267,15 @@ public class ListaPaciente extends javax.swing.JInternalFrame {
                                 .addComponent(buttonVerCitas, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 677, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createSequentialGroup()
-                            .addComponent(textFieldBuscar2, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(37, 37, 37)
-                            .addComponent(buttonBuscar2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(textFieldBuscar2, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(37, 37, 37)
+                                    .addComponent(buttonBuscar2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(jLabel1)
+                                    .addGap(463, 463, 463)))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(buttonRefresacar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(buttonCrear2, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -274,7 +293,9 @@ public class ListaPaciente extends javax.swing.JInternalFrame {
                     .addComponent(jButtonSalir)
                     .addComponent(labelPaciente))
                 .addGap(29, 29, 29)
-                .addComponent(buttonCrear2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(buttonCrear2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(textFieldBuscar2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -294,6 +315,7 @@ public class ListaPaciente extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
     
     
     private void buttonCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCrearActionPerformed
@@ -323,11 +345,50 @@ public class ListaPaciente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonCrear2ActionPerformed
 
     private void buttonBuscar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBuscar2ActionPerformed
-        // TODO add your handling code here:
+        String texto = textFieldBuscar2.getText().trim();
+        List<Paciente> resultados;
+
+        if (texto.matches("\\d+")) {
+            // Si es solo números, buscar por cédula
+            Optional<Paciente> p = pacienteService.buscarPorCedula(texto);
+            resultados = new ArrayList<>();
+            if (p.isPresent()) {
+                resultados.add(p.get());
+            }
+        } else {
+            // Sino buscar por nombre
+            resultados = pacienteService.buscarPorNombre(texto);
+        }
+
+        DefaultTableModel model = (DefaultTableModel) tableDatosPaciente.getModel();
+        model.setRowCount(0);
+
+        for (Paciente p : resultados) {
+            model.addRow(new Object[]{
+                p.getCedula(),
+                p.getNombre(),
+                p.getApellido(),
+                p.getTelefono(),
+                p.getFechaNacimiento()
+            });
+        }
     }//GEN-LAST:event_buttonBuscar2ActionPerformed
 
     private void buttonRefresacar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRefresacar2ActionPerformed
-        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) tableDatosPaciente.getModel();
+        model.setRowCount(0);
+
+        List<Paciente> todosPacientes = pacienteService.listarTodos();
+
+        for (Paciente p : todosPacientes) {
+            model.addRow(new Object[]{
+                p.getCedula(),
+                p.getNombre(),
+                p.getApellido(),
+                p.getTelefono(),
+                p.getFechaNacimiento()
+            });
+        }
     }//GEN-LAST:event_buttonRefresacar2ActionPerformed
 
     private void buttonVerCitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonVerCitasActionPerformed
@@ -339,12 +400,35 @@ public class ListaPaciente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_textFieldBuscar2ActionPerformed
 
     private void buttonEliminar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEliminar2ActionPerformed
-        // TODO add your handling code here:
+        int fila = tableDatosPaciente.getSelectedRow();
+        if (fila != -1) {
+            String cedula = (String) tableDatosPaciente.getValueAt(fila, 0);
+            pacienteService.eliminarPaciente(cedula);
+            JOptionPane.showMessageDialog(this, "Paciente eliminado");
+            buttonRefresacar2ActionPerformed(evt);
+        } else {
+            JOptionPane.showMessageDialog(this, "Seleccione un paciente para eliminar");
+        }
     }//GEN-LAST:event_buttonEliminar2ActionPerformed
 
     private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_jButtonSalirActionPerformed
+
+    private void buttonEditar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditar2ActionPerformed
+        int fila = tableDatosPaciente.getSelectedRow();
+        if (fila != -1) {
+            String cedula = (String) tableDatosPaciente.getValueAt(fila, 0);
+            Optional<Paciente> p = pacienteService.buscarPorCedula(cedula);
+            if (p.isPresent()) {
+                FormularioPacientes formulario = new FormularioPacientes(pacienteService, p.get());
+                getParent().add(formulario);
+                formulario.setVisible(true);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Seleccione un paciente para editar");
+        }
+    }//GEN-LAST:event_buttonEditar2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -361,6 +445,7 @@ public class ListaPaciente extends javax.swing.JInternalFrame {
     private javax.swing.JButton buttonVerCitas;
     private javax.swing.JButton jButtonSalir;
     private javax.swing.JInternalFrame jInternalFrame1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel labelMedicos;

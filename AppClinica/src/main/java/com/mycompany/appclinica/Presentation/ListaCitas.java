@@ -238,7 +238,7 @@ public class ListaCitas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonCompletar2ActionPerformed
 
     private void jButtonSalir2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalir2ActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_jButtonSalir2ActionPerformed
 
 

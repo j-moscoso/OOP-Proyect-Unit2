@@ -4,14 +4,17 @@
  */
 package com.mycompany.appclinica.Presentation;
     
+import com.mycompany.appclinica.Models.EnumEspecialidad;
 import com.mycompany.appclinica.Models.Medico;
 import com.mycompany.appclinica.Services.MedicoService;
+import javax.swing.DefaultComboBoxModel;
 
 /**
  *
  * @author SAMUEL
  */
 public class FormulariosMedicos extends javax.swing.JInternalFrame {
+    
     private MedicoService medicoService;
     private Medico medico;
     /**
@@ -23,6 +26,15 @@ public class FormulariosMedicos extends javax.swing.JInternalFrame {
         this.medicoService = medicoService;
         this.medico = medico;
         initComponents();
+        cargarEspecialidades();
+        if (medico != null) {
+            txtCedula.setEditable(false);
+            txtCedula.setText(medico.getCedula());
+            txtNombre1.setText(medico.getNombre());
+            txtApellido.setText(medico.getApellido());
+            txtTelefono.setText(medico.getTelefono());
+            comboBoxEspecialidades.setSelectedItem(medico.getEspecialidad());
+        }
     }
     
     /**
@@ -88,7 +100,7 @@ public class FormulariosMedicos extends javax.swing.JInternalFrame {
 
         labelEspecialidad.setText("Especialidad:");
 
-        comboBoxEspecialidades.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboBoxEspecialidades.setModel(new DefaultComboBoxModel<>(EnumEspecialidad.values()));
         comboBoxEspecialidades.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboBoxEspecialidadesActionPerformed(evt);
@@ -183,7 +195,14 @@ public class FormulariosMedicos extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
+    
 
+    private void cargarEspecialidades() {
+        comboBoxEspecialidades.removeAllItems(); // limpia el combo antes de llenar
+        for (EnumEspecialidad especialidad : EnumEspecialidad.values()) {
+            comboBoxEspecialidades.addItem(especialidad);
+        }
+    }
     
     private void txtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoActionPerformed
         // TODO add your handling code here:
@@ -198,14 +217,30 @@ public class FormulariosMedicos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtApellidoActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-        txtCedula.setText("");
+        if (medico == null) {
+        txtCedula.setText("");  // Solo borra la cédula si estás creando un paciente nuevo
+        txtCedula.setEditable(true); // Y asegúrate de habilitar la edición solo en este caso
+    }
         txtNombre1.setText("");
         txtApellido.setText("");
         txtTelefono.setText(""); 
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        // TODO add your handling code here:
+        Medico m = new Medico(
+            txtCedula.getText(),
+            txtNombre1.getText(),
+            txtApellido.getText(),
+            (EnumEspecialidad) comboBoxEspecialidades.getSelectedItem(),
+            txtTelefono.getText()
+        );
+        
+        if (medico == null){
+            medicoService.agregarMedico(m);
+        } else { 
+            medicoService.actualizarMedico(m.getCedula(),m);
+        }
+        this.dispose();                     
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void comboBoxEspecialidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxEspecialidadesActionPerformed
@@ -217,7 +252,7 @@ public class FormulariosMedicos extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnLimpiar;
-    private javax.swing.JComboBox<String> comboBoxEspecialidades;
+    private javax.swing.JComboBox<EnumEspecialidad> comboBoxEspecialidades;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel labelApellido;
     private javax.swing.JLabel labelCedula;

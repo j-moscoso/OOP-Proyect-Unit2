@@ -38,13 +38,13 @@ public class MedicoService {
      */
     public boolean agregarMedico(Medico medico) {
         if (medico == null || !medico.esValido()) {
-            System.err.println("Error: El médico es nulo o no es válido.");
+            System.err.println("Error: El medico es nulo o no es valido.");
             return false;
         }
 
         // Validar que no exista un médico con la misma cédula
         if (buscarPorCedula(medico.getCedula()).isPresent()) {
-            System.err.println("Error: Ya existe un médico con la cédula " + medico.getCedula());
+            System.err.println("Error: Ya existe un medico con la cédula " + medico.getCedula());
             return false;
         }
 
