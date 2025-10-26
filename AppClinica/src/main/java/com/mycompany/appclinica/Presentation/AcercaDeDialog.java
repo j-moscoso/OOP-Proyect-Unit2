@@ -6,7 +6,7 @@ package com.mycompany.appclinica.Presentation;
 
 /**
  *
- * @author Juan Moscoso
+ * @author Samuel Castaño, Alejandro Toro y Hector Ospina
  */
 public class AcercaDeDialog extends javax.swing.JDialog {
 

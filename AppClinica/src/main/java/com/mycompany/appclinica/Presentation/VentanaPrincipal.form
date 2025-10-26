@@ -71,6 +71,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Gesti&#xf3;n Cita"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuItemGestionCitaActionPerformed"/>
+                  </Events>
                 </MenuItem>
               </SubComponents>
             </Menu>
@@ -167,7 +170,7 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="labelStatus">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Estado: "/>
+            <Property name="text" type="java.lang.String" value="Estado: :)"/>
           </Properties>
         </Component>
       </SubComponents>

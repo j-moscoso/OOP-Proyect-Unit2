@@ -20,69 +20,79 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+              <EmptySpace min="19" pref="19" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Component id="buttonEditar3" max="32767" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="buttonEliminar3" min="-2" pref="105" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="buttonConfirmar" min="-2" pref="112" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="buttonCancelar" min="-2" pref="117" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="buttonCompletar2" min="-2" pref="112" max="-2" attributes="0"/>
-                      </Group>
-                      <Component id="jScrollPane2" min="-2" pref="629" max="-2" attributes="0"/>
+                  <Component id="jScrollPane2" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="buttonEditar3" min="-2" pref="111" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="buttonEliminar3" min="-2" pref="105" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="buttonConfirmar" min="-2" pref="112" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="buttonCancelar" min="-2" pref="117" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="buttonCompletar2" min="-2" pref="112" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jButton1" min="-2" pref="119" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="282" max="32767" attributes="0"/>
                   </Group>
-                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="labelCitas" min="-2" pref="84" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="jButtonSalir2" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <Component id="buttomCrear3" min="-2" pref="102" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="buttonBuscar3" min="-2" pref="93" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="textFieldBuscar3" min="-2" pref="266" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jComboBoxBuscarEstado" min="-2" pref="131" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="labelCitas" min="-2" pref="84" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="jButtonSalir2" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="buttomCrear3" min="-2" pref="102" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="textFieldBuscar3" min="-2" pref="372" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="buttonBuscar3" min="-2" pref="82" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="buttonRefrescar" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="23" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="labelCitas" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jButtonSalir2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="labelCitas" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="buttomCrear3" alignment="0" pref="36" max="32767" attributes="0"/>
-                  <Component id="buttonBuscar3" alignment="0" max="32767" attributes="0"/>
-                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                      <Component id="textFieldBuscar3" alignment="3" max="32767" attributes="0"/>
-                      <Component id="jComboBoxBuscarEstado" alignment="3" max="32767" attributes="0"/>
-                  </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="buttomCrear3" alignment="3" pref="36" max="32767" attributes="0"/>
+                  <Component id="textFieldBuscar3" alignment="3" max="32767" attributes="0"/>
+                  <Component id="buttonBuscar3" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="buttonRefrescar" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jScrollPane2" min="-2" pref="281" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="buttonCancelar" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
-                  <Component id="buttonCompletar2" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
-                  <Component id="buttonConfirmar" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
-                  <Component id="buttonEliminar3" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
-                  <Component id="buttonEditar3" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jButton1" alignment="0" min="-2" pref="38" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="buttonCancelar" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                      <Component id="buttonCompletar2" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                      <Component id="buttonConfirmar" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                      <Component id="buttonEliminar3" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                      <Component id="buttonEditar3" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
           </Group>
@@ -114,7 +124,6 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Microsoft Tai Le" size="14" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Buscar"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textFieldBuscar3ActionPerformed"/>
@@ -132,27 +141,6 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonBuscar3ActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jComboBoxBuscarEstado">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Microsoft Tai Le" size="14" style="1"/>
-        </Property>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="PENDIENTE"/>
-            <StringItem index="1" value="CONFIRMADA"/>
-            <StringItem index="2" value="CANCELADA"/>
-            <StringItem index="3" value="COMPLETADA"/>
-          </StringArray>
-        </Property>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBoxBuscarEstadoActionPerformed"/>
-      </Events>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-      </AuxValues>
-    </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane2">
       <AuxValues>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
@@ -166,13 +154,14 @@
               <Font name="Microsoft Tai Le" size="14" style="1"/>
             </Property>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="6" rowCount="4">
+              <Table columnCount="7" rowCount="4">
                 <Column editable="true" title="ID" type="java.lang.Object"/>
                 <Column editable="true" title="Paciente" type="java.lang.Object"/>
                 <Column editable="true" title="M&#xe9;dico" type="java.lang.Object"/>
                 <Column editable="true" title="Fecha" type="java.lang.Object"/>
                 <Column editable="true" title="Estado" type="java.lang.Object"/>
                 <Column editable="true" title="Motivo" type="java.lang.Object"/>
+                <Column editable="true" title="Especialidad" type="java.lang.Object"/>
               </Table>
             </Property>
           </Properties>
@@ -192,8 +181,14 @@
     </Component>
     <Component class="javax.swing.JButton" name="buttonEliminar3">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="ff" type="rgb"/>
+        </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Microsoft Tai Le" size="14" style="1"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Eliminar"/>
       </Properties>
@@ -236,14 +231,50 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButtonSalir2">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="ff" type="rgb"/>
+        </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Microsoft New Tai Lue" size="18" style="1"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
         <Property name="text" type="java.lang.String" value="x"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonSalir2ActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButton1">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Microsoft Tai Le" size="14" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="No Asisti&#xf3;"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="buttonRefrescar">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Microsoft Tai Le" size="14" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Refrescar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonRefrescarActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="12" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Ingrese su c&#xe9;dula:"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

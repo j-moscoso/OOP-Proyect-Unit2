@@ -4,7 +4,10 @@
  */
 package com.mycompany.appclinica.Presentation;
 
+import com.mycompany.appclinica.Models.Cita;
 import com.mycompany.appclinica.Models.Paciente;
+import com.mycompany.appclinica.Services.CitaService;
+import com.mycompany.appclinica.Services.MedicoService;
 import com.mycompany.appclinica.Services.PacienteService;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,16 +17,20 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Slleider
+ * @author Juan Moscoso y Slleider Rojas
  */
 public class ListaPaciente extends javax.swing.JInternalFrame {
     private PacienteService pacienteService;
+    private MedicoService medicoService;
+    private CitaService citaService;
     /**
      * Creates new form ListaPaciente
      * @param pacienteService
      */
-    public ListaPaciente(PacienteService pacienteService) {
+    public ListaPaciente(PacienteService pacienteService, MedicoService medicoService, CitaService citaService) {
         this.pacienteService = pacienteService;
+        this.medicoService = medicoService;
+        this.citaService = citaService;
         initComponents();
     }
 
@@ -392,7 +399,17 @@ public class ListaPaciente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonRefresacar2ActionPerformed
 
     private void buttonVerCitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonVerCitasActionPerformed
-        // TODO add your handling code here:
+        int fila = tableDatosPaciente.getSelectedRow();
+        if (fila != -1) {
+            String cedula = tableDatosPaciente.getValueAt(fila, 0).toString();
+            ListaCitas form = new ListaCitas(citaService, medicoService, pacienteService); 
+            this.getParent().add(form);
+            form.setVisible(true);
+            List<Cita> citasPaciente = citaService.buscarPorPaciente(cedula);
+            form.mostrarCitas(citasPaciente);  // Debe ser público
+        } else {
+            JOptionPane.showMessageDialog(this, "Seleccione un paciente para ver sus citas.");
+        }
     }//GEN-LAST:event_buttonVerCitasActionPerformed
 
     private void textFieldBuscar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldBuscar2ActionPerformed

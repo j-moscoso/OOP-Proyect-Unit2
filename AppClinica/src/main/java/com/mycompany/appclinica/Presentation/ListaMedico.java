@@ -14,7 +14,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Slleider
+ * @author Juan Moscoso y Slleider Rojas
  */
 public class ListaMedico extends javax.swing.JInternalFrame {
     private MedicoService medicoService;

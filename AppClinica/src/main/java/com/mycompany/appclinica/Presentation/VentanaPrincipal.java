@@ -10,7 +10,7 @@ import com.mycompany.appclinica.Services.PacienteService;
 
 /**
  *
- * @author Juan Moscoso
+ * @author Juan Moscoso y Slleider Rojas
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
     
@@ -63,7 +63,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         panelStatus.setBackground(new java.awt.Color(204, 204, 204));
 
-        labelStatus.setText("Estado: ");
+        labelStatus.setText("Estado: :)");
 
         javax.swing.GroupLayout panelStatusLayout = new javax.swing.GroupLayout(panelStatus);
         panelStatus.setLayout(panelStatusLayout);
@@ -131,6 +131,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         menuCita.setText("Cita");
 
         menuItemGestionCita.setText("Gestión Cita");
+        menuItemGestionCita.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemGestionCitaActionPerformed(evt);
+            }
+        });
         menuCita.add(menuItemGestionCita);
 
         menuPrincipal.add(menuCita);
@@ -162,7 +167,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     
     private void abrirListaPaciente() {
-        ListaPaciente listaPac = new ListaPaciente(pacienteService); // Envia el servicio
+        ListaPaciente listaPac = new ListaPaciente(pacienteService, medicoService, citaService); // Envia el servicio
         desktopPane.add(listaPac);
         listaPac.setVisible(true);
 }
@@ -186,6 +191,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         desktopPane.add(listaMed);
         listaMed.setVisible(true);
     }//GEN-LAST:event_menuItemGestionMedicoActionPerformed
+
+    private void menuItemGestionCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemGestionCitaActionPerformed
+        ListaCitas listaCit = new ListaCitas(citaService, medicoService, pacienteService);
+        desktopPane.add(listaCit);
+        listaCit.setVisible(true);
+    }//GEN-LAST:event_menuItemGestionCitaActionPerformed
 
     /**
      * @param args the command line arguments

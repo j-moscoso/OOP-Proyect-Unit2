@@ -10,7 +10,7 @@ import java.time.LocalDate;
 
 /**
  *
- * @author Samuel Castaño Arenas
+ * @author Juan Moscoso y Slleider Rojas
  */
 public class FormularioPacientes extends javax.swing.JInternalFrame {
     private PacienteService pacienteService;
@@ -96,7 +96,6 @@ public class FormularioPacientes extends javax.swing.JInternalFrame {
         });
 
         btnGuardar.setBackground(new java.awt.Color(102, 255, 102));
-        btnGuardar.setForeground(new java.awt.Color(0, 0, 0));
         btnGuardar.setText("Guardar");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,8 +103,6 @@ public class FormularioPacientes extends javax.swing.JInternalFrame {
             }
         });
 
-        btnLimpiar.setBackground(new java.awt.Color(255, 255, 255));
-        btnLimpiar.setForeground(new java.awt.Color(0, 0, 0));
         btnLimpiar.setText("Limpiar");
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,7 +111,6 @@ public class FormularioPacientes extends javax.swing.JInternalFrame {
         });
 
         btnCancelar.setBackground(new java.awt.Color(255, 51, 51));
-        btnCancelar.setForeground(new java.awt.Color(0, 0, 0));
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -122,8 +118,9 @@ public class FormularioPacientes extends javax.swing.JInternalFrame {
             }
         });
 
-        label1.setForeground(new java.awt.Color(204, 204, 204));
-        label1.setText("FORMULARIO PACIENTES");
+        label1.setFont(new java.awt.Font("Microsoft Tai Le", 1, 12)); // NOI18N
+        label1.setForeground(new java.awt.Color(0, 0, 0));
+        label1.setText("NUEVO /EDITAR PACIENTE");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -161,13 +158,10 @@ public class FormularioPacientes extends javax.swing.JInternalFrame {
                                         .addComponent(txtApellido)))))
                         .addGap(0, 0, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(124, 124, 124)
-                        .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(139, 139, 139)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -220,7 +214,7 @@ public class FormularioPacientes extends javax.swing.JInternalFrame {
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         if (paciente == null) {
         txtCedula.setText("");  // Solo borra la cédula si estás creando un paciente nuevo
-        txtCedula.setEditable(true); // Y asegúrate de habilitar la edición solo en este caso
+        txtCedula.setEditable(true); 
     }
         txtNombre.setText("");
         txtApellido.setText("");

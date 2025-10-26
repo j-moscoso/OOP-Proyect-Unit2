@@ -11,7 +11,7 @@ import javax.swing.DefaultComboBoxModel;
 
 /**
  *
- * @author SAMUEL
+ * @author Juan Moscoso y Slleider Rojas
  */
 public class FormulariosMedicos extends javax.swing.JInternalFrame {
     
@@ -218,8 +218,8 @@ public class FormulariosMedicos extends javax.swing.JInternalFrame {
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         if (medico == null) {
-        txtCedula.setText("");  // Solo borra la cédula si estás creando un paciente nuevo
-        txtCedula.setEditable(true); // Y asegúrate de habilitar la edición solo en este caso
+        txtCedula.setText("");  // Solo borra la cédula si estás creando un medico nuevo
+        txtCedula.setEditable(true); 
     }
         txtNombre1.setText("");
         txtApellido.setText("");

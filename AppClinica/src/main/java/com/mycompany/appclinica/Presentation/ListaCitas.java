@@ -4,16 +4,33 @@
  */
 package com.mycompany.appclinica.Presentation;
 
+import com.mycompany.appclinica.Models.Cita;
+import com.mycompany.appclinica.Services.CitaService;
+import com.mycompany.appclinica.Services.MedicoService;
+import com.mycompany.appclinica.Services.PacienteService;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
- * @author Slleider
+ * @author Juan Moscoso y Slleider Rojas
  */
 public class ListaCitas extends javax.swing.JInternalFrame {
-
+    private CitaService citaService;
+    private MedicoService medicoService;
+    private PacienteService pacienteService;
     /**
      * Creates new form ListaCitas
      */
-    public ListaCitas() {
+    public ListaCitas(CitaService citaService, MedicoService medicoService, PacienteService pacienteService) {
+        this.citaService = citaService;
+        this.medicoService = medicoService;
+        this.pacienteService = pacienteService;
         initComponents();
     }
 
@@ -30,7 +47,6 @@ public class ListaCitas extends javax.swing.JInternalFrame {
         buttomCrear3 = new javax.swing.JButton();
         textFieldBuscar3 = new javax.swing.JTextField();
         buttonBuscar3 = new javax.swing.JButton();
-        jComboBoxBuscarEstado = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         tableListaCitas = new javax.swing.JTable();
         buttonEditar3 = new javax.swing.JButton();
@@ -39,6 +55,9 @@ public class ListaCitas extends javax.swing.JInternalFrame {
         buttonConfirmar = new javax.swing.JButton();
         buttonCompletar2 = new javax.swing.JButton();
         jButtonSalir2 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        buttonRefrescar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         labelCitas.setFont(new java.awt.Font("Microsoft Tai Le", 1, 24)); // NOI18N
         labelCitas.setText("Citas");
@@ -52,7 +71,6 @@ public class ListaCitas extends javax.swing.JInternalFrame {
         });
 
         textFieldBuscar3.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
-        textFieldBuscar3.setText("Buscar");
         textFieldBuscar3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textFieldBuscar3ActionPerformed(evt);
@@ -68,24 +86,16 @@ public class ListaCitas extends javax.swing.JInternalFrame {
             }
         });
 
-        jComboBoxBuscarEstado.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
-        jComboBoxBuscarEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PENDIENTE", "CONFIRMADA", "CANCELADA", "COMPLETADA" }));
-        jComboBoxBuscarEstado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxBuscarEstadoActionPerformed(evt);
-            }
-        });
-
         tableListaCitas.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         tableListaCitas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Paciente", "Médico", "Fecha", "Estado", "Motivo"
+                "ID", "Paciente", "Médico", "Fecha", "Estado", "Motivo", "Especialidad"
             }
         ));
         jScrollPane2.setViewportView(tableListaCitas);
@@ -98,7 +108,9 @@ public class ListaCitas extends javax.swing.JInternalFrame {
             }
         });
 
+        buttonEliminar3.setBackground(new java.awt.Color(255, 0, 0));
         buttonEliminar3.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
+        buttonEliminar3.setForeground(new java.awt.Color(255, 255, 255));
         buttonEliminar3.setText("Eliminar");
         buttonEliminar3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -130,13 +142,34 @@ public class ListaCitas extends javax.swing.JInternalFrame {
             }
         });
 
+        jButtonSalir2.setBackground(new java.awt.Color(255, 0, 0));
         jButtonSalir2.setFont(new java.awt.Font("Microsoft New Tai Lue", 1, 18)); // NOI18N
+        jButtonSalir2.setForeground(new java.awt.Color(255, 255, 255));
         jButtonSalir2.setText("x");
         jButtonSalir2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonSalir2ActionPerformed(evt);
             }
         });
+
+        jButton1.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
+        jButton1.setText("No Asistió");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        buttonRefrescar.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
+        buttonRefrescar.setText("Refrescar");
+        buttonRefrescar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonRefrescarActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel1.setText("Ingrese su cédula:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -145,56 +178,65 @@ public class ListaCitas extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(buttonEditar3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGap(18, 18, 18)
-                            .addComponent(buttonEliminar3, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(buttonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(buttonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(buttonCompletar2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 629, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(labelCitas, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonSalir2))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(buttomCrear3, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(buttonBuscar3, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(textFieldBuscar3, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jComboBoxBuscarEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(23, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(buttonEditar3, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(buttonEliminar3, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(buttonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(buttonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(buttonCompletar2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 282, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(labelCitas, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonSalir2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(buttomCrear3, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(textFieldBuscar3, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(buttonBuscar3, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(buttonRefrescar)))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelCitas)
-                    .addComponent(jButtonSalir2))
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonSalir2)
+                    .addComponent(labelCitas))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1)
+                .addGap(5, 5, 5)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buttomCrear3, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
-                    .addComponent(buttonBuscar3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(textFieldBuscar3)
-                        .addComponent(jComboBoxBuscarEstado)))
+                    .addComponent(textFieldBuscar3)
+                    .addComponent(buttonBuscar3)
+                    .addComponent(buttonRefrescar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buttonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonCompletar2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonEliminar3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonEditar3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(buttonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(buttonCompletar2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(buttonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(buttonEliminar3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(buttonEditar3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(14, 14, 14))
         );
 
@@ -202,44 +244,156 @@ public class ListaCitas extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttomCrear3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttomCrear3ActionPerformed
-        // TODO add your handling code here:
+        FormularioCitas form = new FormularioCitas(this.pacienteService, this.medicoService, this.citaService, null);
+        getParent().add(form); // Abrir en el desktopPane
+        form.setVisible(true);
     }//GEN-LAST:event_buttomCrear3ActionPerformed
 
     private void textFieldBuscar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldBuscar3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textFieldBuscar3ActionPerformed
 
+    public void mostrarCitas(List<Cita> citas) {
+        DefaultTableModel modelo = (DefaultTableModel) tableListaCitas.getModel();
+        modelo.setRowCount(0); // Limpiar filas
+        for (Cita c : citas) {
+            // Agregar cada cita en una fila con sus datos relevantes
+            modelo.addRow(new Object[]{
+                c.getId(),
+                c.getPaciente().getCedula() + " - " + c.getPaciente().getNombre(),
+                c.getMedico().getCedula() + " - " + c.getMedico().getNombre(),
+                c.getFecha(),
+                c.getEstado(),
+                c.getMotivo(),
+                c.getMedico().getEspecialidad()
+            });
+        }
+    }
+    
     private void buttonBuscar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBuscar3ActionPerformed
-        // TODO add your handling code here:
+        String cedula = textFieldBuscar3.getText().trim();
+        if (cedula.isEmpty()) {
+            // Si no hay cédula mostrar todas las citas o un mensaje
+            mostrarCitas(citaService.listarTodas());
+            return;
+        }
+        // Buscar citas por paciente y por médico
+        List<Cita> citasPaciente = citaService.buscarPorPaciente(cedula);
+        List<Cita> citasMedico = citaService.buscarPorMedico(cedula);
+
+        // Combinar resultados sin duplicados
+        Set<Cita> citasCombinadas = new LinkedHashSet<>();
+        citasCombinadas.addAll(citasPaciente);
+        citasCombinadas.addAll(citasMedico);
+
+        // Mostrar en tabla
+        mostrarCitas(new ArrayList<>(citasCombinadas));
     }//GEN-LAST:event_buttonBuscar3ActionPerformed
 
-    private void jComboBoxBuscarEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxBuscarEstadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxBuscarEstadoActionPerformed
-
     private void buttonEditar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditar3ActionPerformed
-        // TODO add your handling code here:
+        int fila = tableListaCitas.getSelectedRow();
+        if (fila != -1) {
+            String idCita = tableListaCitas.getValueAt(fila, 0).toString();
+            Optional<Cita> citaOpt = citaService.buscarPorId(idCita);
+            if (citaOpt.isPresent()) {
+                // Abrir FormularioCitas en modo editar
+                FormularioCitas form = new FormularioCitas(pacienteService, medicoService, citaService, citaOpt.get()); 
+                this.getParent().add(form); // O tu método para mostrar el formulario
+                form.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(this, "No se encontró la cita para editar");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Seleccione una cita para editar");
+        }
     }//GEN-LAST:event_buttonEditar3ActionPerformed
 
     private void buttonEliminar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEliminar3ActionPerformed
-        // TODO add your handling code here:
+        int fila = tableListaCitas.getSelectedRow();
+        if (fila != -1) {
+            // Obtener el valor como String y luego conviértelo a int
+            String idCitaStr = tableListaCitas.getValueAt(fila, 0).toString();
+            citaService.eliminarCita(idCitaStr);
+            JOptionPane.showMessageDialog(this, "Cita eliminada");
+            buttonRefrescarActionPerformed(evt);
+        } else {
+            JOptionPane.showMessageDialog(this, "Seleccione una cita para eliminar");
+        }
     }//GEN-LAST:event_buttonEliminar3ActionPerformed
 
     private void buttonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelarActionPerformed
-        // TODO add your handling code here:
+         int fila = tableListaCitas.getSelectedRow();
+        if (fila != -1) {
+            String idCita = tableListaCitas.getValueAt(fila, 0).toString();
+            boolean exito = citaService.cancelarCita(idCita);
+            if (exito) {
+                JOptionPane.showMessageDialog(this, "Cita cancelada correctamente");
+                buttonRefrescarActionPerformed(evt);
+            } else {
+                JOptionPane.showMessageDialog(this, "No se pudo cancelar la cita");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Seleccione una cita para cancelar");
+        }
     }//GEN-LAST:event_buttonCancelarActionPerformed
 
     private void buttonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConfirmarActionPerformed
-        // TODO add your handling code here:
+        int fila = tableListaCitas.getSelectedRow();
+        if (fila != -1) {
+            String idCita = tableListaCitas.getValueAt(fila, 0).toString();
+            boolean exito = citaService.confirmarCita(idCita);
+            if (exito) {
+                JOptionPane.showMessageDialog(this, "Cita confirmada correctamente");
+                buttonRefrescarActionPerformed(evt);
+            } else {
+                JOptionPane.showMessageDialog(this, "No se pudo confirmar la cita");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Seleccione una cita para confirmar");
+        }
     }//GEN-LAST:event_buttonConfirmarActionPerformed
 
     private void buttonCompletar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCompletar2ActionPerformed
-        // TODO add your handling code here:
+         int fila = tableListaCitas.getSelectedRow();
+        if (fila != -1) {
+            String idCita = tableListaCitas.getValueAt(fila, 0).toString();
+            boolean exito = citaService.completarCita(idCita);
+            if (exito) {
+                JOptionPane.showMessageDialog(this, "Cita completada correctamente");
+                buttonRefrescarActionPerformed(evt);
+            } else {
+                JOptionPane.showMessageDialog(this, "No se pudo completar la cita");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Seleccione una cita para completar");
+        }
     }//GEN-LAST:event_buttonCompletar2ActionPerformed
 
     private void jButtonSalir2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalir2ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButtonSalir2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int fila = tableListaCitas.getSelectedRow();
+        if (fila != -1) {
+            String idCita = tableListaCitas.getValueAt(fila, 0).toString();
+            boolean exito = citaService.marcarNoAsistio(idCita);
+            if (exito) {
+                JOptionPane.showMessageDialog(this, "La cita fue marcada como 'no asistió'");
+                buttonRefrescarActionPerformed(evt);
+            } else {
+                JOptionPane.showMessageDialog(this, "No se pudo actualizar el estado de la cita");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Seleccione una cita para marcar como no asistió");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void buttonRefrescarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRefrescarActionPerformed
+       List<Cita> todas = citaService.listarTodas();
+        // Usa el mismo método utilitario para mostrar todas las citas en la tabla
+        mostrarCitas(todas);
+    }//GEN-LAST:event_buttonRefrescarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -250,8 +404,10 @@ public class ListaCitas extends javax.swing.JInternalFrame {
     private javax.swing.JButton buttonConfirmar;
     private javax.swing.JButton buttonEditar3;
     private javax.swing.JButton buttonEliminar3;
+    private javax.swing.JButton buttonRefrescar;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonSalir2;
-    private javax.swing.JComboBox<String> jComboBoxBuscarEstado;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel labelCitas;
     private javax.swing.JTable tableListaCitas;
