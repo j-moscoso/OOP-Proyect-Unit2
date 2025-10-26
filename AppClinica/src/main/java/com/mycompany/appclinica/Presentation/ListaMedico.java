@@ -4,16 +4,19 @@
  */
 package com.mycompany.appclinica.Presentation;
 
+import com.mycompany.appclinica.Services.MedicoService;
+
 /**
  *
  * @author Slleider
  */
 public class ListaMedico extends javax.swing.JInternalFrame {
-
+    private MedicoService medicoService;
     /**
      * Creates new form ListaPacientes
      */
-    public ListaMedico() {
+    public ListaMedico(MedicoService medicoService) {
+        this.medicoService = medicoService;
         initComponents();
     }
 
@@ -156,7 +159,9 @@ public class ListaMedico extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCrearActionPerformed
-        // TODO add your handling code here:
+        FormulariosMedicos form = new FormulariosMedicos(medicoService, null);
+        getParent().add(form); // Abrir en el desktopPane
+        form.setVisible(true);
     }//GEN-LAST:event_buttonCrearActionPerformed
 
     private void buttonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBuscarActionPerformed

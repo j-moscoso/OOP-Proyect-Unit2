@@ -4,16 +4,20 @@
  */
 package com.mycompany.appclinica.Presentation;
 
+import com.mycompany.appclinica.Services.PacienteService;
+
 /**
  *
  * @author Slleider
  */
 public class ListaPaciente extends javax.swing.JInternalFrame {
-
+    private PacienteService pacienteService;
     /**
      * Creates new form ListaPaciente
+     * @param pacienteService
      */
-    public ListaPaciente() {
+    public ListaPaciente(PacienteService pacienteService) {
+        this.pacienteService = pacienteService;
         initComponents();
     }
 
@@ -266,18 +270,20 @@ public class ListaPaciente extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buttonVerCitas, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonEditar2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonEliminar2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(buttonEditar2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(buttonVerCitas, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(buttonEliminar2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    
     private void buttonCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCrearActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_buttonCrearActionPerformed
 
     private void buttonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBuscarActionPerformed
@@ -297,7 +303,9 @@ public class ListaPaciente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_textFieldBuscarActionPerformed
 
     private void buttonCrear2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCrear2ActionPerformed
-        // TODO add your handling code here:
+        FormularioPacientes form = new FormularioPacientes(pacienteService, null);
+        getParent().add(form); // Abrir en el desktopPane
+        form.setVisible(true);
     }//GEN-LAST:event_buttonCrear2ActionPerformed
 
     private void buttonBuscar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBuscar2ActionPerformed

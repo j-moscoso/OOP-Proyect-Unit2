@@ -3,20 +3,28 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
 package com.mycompany.appclinica.Presentation;
+    
+import com.mycompany.appclinica.Models.Medico;
+import com.mycompany.appclinica.Services.MedicoService;
 
 /**
  *
  * @author SAMUEL
  */
 public class FormulariosMedicos extends javax.swing.JInternalFrame {
-
+    private MedicoService medicoService;
+    private Medico medico;
     /**
      * Creates new form FormulariosMedicos
+     * @param medicoService
+     * @param medico
      */
-    public FormulariosMedicos() {
+    public FormulariosMedicos(MedicoService medicoService, Medico medico) {
+        this.medicoService = medicoService;
+        this.medico = medico;
         initComponents();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -56,15 +64,21 @@ public class FormulariosMedicos extends javax.swing.JInternalFrame {
         jLabel1.setText("NUEVO / EDITAR MEDICO ");
 
         btnGuardar.setBackground(new java.awt.Color(102, 255, 102));
-        btnGuardar.setForeground(new java.awt.Color(0, 0, 0));
         btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
 
-        btnLimpiar.setBackground(new java.awt.Color(255, 255, 255));
-        btnLimpiar.setForeground(new java.awt.Color(0, 0, 0));
         btnLimpiar.setText("Limpiar");
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setBackground(new java.awt.Color(255, 51, 51));
-        btnCancelar.setForeground(new java.awt.Color(0, 0, 0));
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -75,6 +89,11 @@ public class FormulariosMedicos extends javax.swing.JInternalFrame {
         labelEspecialidad.setText("Especialidad:");
 
         comboBoxEspecialidades.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboBoxEspecialidades.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxEspecialidadesActionPerformed(evt);
+            }
+        });
 
         labelApellido.setText("Apellido:");
 
@@ -163,18 +182,35 @@ public class FormulariosMedicos extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
 
+    
     private void txtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTelefonoActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void txtApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtApellidoActionPerformed
+
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        txtCedula.setText("");
+        txtNombre1.setText("");
+        txtApellido.setText("");
+        txtTelefono.setText(""); 
+    }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void comboBoxEspecialidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxEspecialidadesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboBoxEspecialidadesActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

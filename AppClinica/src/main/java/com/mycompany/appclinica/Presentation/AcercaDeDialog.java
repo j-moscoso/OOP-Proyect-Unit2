@@ -6,7 +6,7 @@ package com.mycompany.appclinica.Presentation;
 
 /**
  *
- * @author juanc
+ * @author Juan Moscoso
  */
 public class AcercaDeDialog extends javax.swing.JDialog {
 
@@ -69,6 +69,11 @@ public class AcercaDeDialog extends javax.swing.JDialog {
 
         buttonCerrar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         buttonCerrar.setText("Cerrar");
+        buttonCerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonCerrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -128,6 +133,10 @@ public class AcercaDeDialog extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void buttonCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCerrarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_buttonCerrarActionPerformed
 
     /**
      * @param args the command line arguments

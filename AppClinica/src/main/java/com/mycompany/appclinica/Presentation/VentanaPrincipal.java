@@ -4,12 +4,19 @@
  */
 package com.mycompany.appclinica.Presentation;
 
+import com.mycompany.appclinica.Services.CitaService;
+import com.mycompany.appclinica.Services.MedicoService;
+import com.mycompany.appclinica.Services.PacienteService;
+
 /**
  *
  * @author Juan Moscoso
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
-
+    
+    private PacienteService pacienteService = new PacienteService();
+    private MedicoService medicoService = new MedicoService();
+    private CitaService citaService = new CitaService(pacienteService, medicoService);
     /**
      * Creates new form VentanaPrincipal
      */
@@ -100,6 +107,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         menuPaciente.setText("Paciente");
 
         menuItemGestionPaciente.setText("Gestión de Pacientes");
+        menuItemGestionPaciente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemGestionPacienteActionPerformed(evt);
+            }
+        });
         menuPaciente.add(menuItemGestionPaciente);
 
         menuPrincipal.add(menuPaciente);
@@ -107,6 +119,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         menuMedico.setText("Médico");
 
         menuItemGestionMedico.setText("Gestión de Médicos");
+        menuItemGestionMedico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemGestionMedicoActionPerformed(evt);
+            }
+        });
         menuMedico.add(menuItemGestionMedico);
 
         menuPrincipal.add(menuMedico);
@@ -143,14 +160,32 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    private void abrirListaPaciente() {
+        ListaPaciente listaPac = new ListaPaciente(pacienteService); // Envia el servicio
+        desktopPane.add(listaPac);
+        listaPac.setVisible(true);
+}
+    
     private void menuItemSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemSalirActionPerformed
-        // TODO add your handling code here:
+        System.exit(0);
     }//GEN-LAST:event_menuItemSalirActionPerformed
 
     private void menuItemAcercaDeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemAcercaDeActionPerformed
-        // TODO add your handling code here:
+        AcercaDeDialog dialog = new AcercaDeDialog(this, true); // "this" es el JFrame como owner y "true" es modalidad
+        dialog.setLocationRelativeTo(this); // Centrar sobre la ventana principal
+        dialog.setVisible(true);
     }//GEN-LAST:event_menuItemAcercaDeActionPerformed
+
+    private void menuItemGestionPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemGestionPacienteActionPerformed
+        abrirListaPaciente();
+    }//GEN-LAST:event_menuItemGestionPacienteActionPerformed
+
+    private void menuItemGestionMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemGestionMedicoActionPerformed
+        ListaMedico listaMed = new ListaMedico(medicoService);
+        desktopPane.add(listaMed);
+        listaMed.setVisible(true);
+    }//GEN-LAST:event_menuItemGestionMedicoActionPerformed
 
     /**
      * @param args the command line arguments

@@ -4,16 +4,25 @@
  */
 package com.mycompany.appclinica.Presentation;
 
+import com.mycompany.appclinica.Models.Paciente;
+import com.mycompany.appclinica.Services.PacienteService;
+import java.time.LocalDate;
+
 /**
  *
  * @author Samuel Castaño Arenas
  */
 public class FormularioPacientes extends javax.swing.JInternalFrame {
-
+    private PacienteService pacienteService;
+    private Paciente paciente;
     /**
      * Creates new form FormularioPacientes
+     * @param pacienteService
+     * @param paciente
      */
-    public FormularioPacientes() {
+    public FormularioPacientes(PacienteService pacienteService, Paciente paciente) {
+        this.pacienteService = pacienteService;
+        this.paciente = paciente;
         initComponents();
     }
 
@@ -195,11 +204,15 @@ public class FormularioPacientes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtApellidoActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-        // TODO add your handling code here:
+        txtCedula.setText("");
+        txtNombre.setText("");
+        txtApellido.setText("");
+        txtTelefono.setText("");
+        txtFechaNacimiento.setText("");
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void txtFechaNacimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaNacimientoActionPerformed
@@ -211,7 +224,20 @@ public class FormularioPacientes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtTelefonoActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        // TODO add your handling code here:
+        Paciente p = new Paciente(
+            txtCedula.getText(),
+            txtNombre.getText(),
+            txtApellido.getText(),
+            txtTelefono.getText(),
+            LocalDate.parse(txtFechaNacimiento.getText())
+        );
+        
+        if (paciente == null){
+            pacienteService.agregarPaciente(p);
+        } else { 
+            pacienteService.actualizarPaciente(p.getCedula(),p);
+        }
+        this.dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
 
