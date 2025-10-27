@@ -103,10 +103,7 @@ public class Medico {
      */
     @Override
     public String toString() {
-        return getNombreCompleto()
-                + " | Cédula: " + cedula
-                + " | Especialidad: " + especialidad.toString()
-                + " | Teléfono: " + telefono;
+        return getNombreCompleto();
     }
 
     // Getters y Setters
