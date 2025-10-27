@@ -9,21 +9,28 @@ import com.mycompany.appclinica.Services.PacienteService;
 import java.time.LocalDate;
 
 /**
- *
+ * Formulario para crear o editar pacientes.
+ * Provee campos para ingresar o modificar datos como cédula, nombre, apellido,
+ * teléfono y fecha de nacimiento.
+ * Utiliza el servicio de pacientes para guardar o actualizar la información.
+ * 
  * @author Juan Moscoso y Slleider Rojas
  */
 public class FormularioPacientes extends javax.swing.JInternalFrame {
     private PacienteService pacienteService;
     private Paciente paciente;
     /**
-     * Creates new form FormularioPacientes
-     * @param pacienteService
-     * @param paciente
+     * Constructor del formulario.
+     * Si se pasa un paciente, carga sus datos para edición y bloquea la cédula.
+     * 
+     * @param pacienteService Servicio para gestionar pacientes
+     * @param paciente Paciente existente para edición o null para nuevo
      */
     public FormularioPacientes(PacienteService pacienteService, Paciente paciente) {
         this.pacienteService = pacienteService;
-        this.paciente = paciente;
+        this.paciente = paciente;   // Paciente a editar o null para nuevo paciente
         initComponents();
+        // Carga los datos para edición y bloquea campos inmodificables
         if (paciente != null) {
             txtCedula.setEditable(false);
             txtCedula.setText(paciente.getCedula());
@@ -247,11 +254,20 @@ public class FormularioPacientes extends javax.swing.JInternalFrame {
     private void txtApellidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtApellidoActionPerformed
-
+    /**
+     * Acción del botón cancelar para cerrar el formulario sin guardar.
+     * 
+     * @param evt evento de acción
+     */
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
-
+    /**
+     * Acción del botón limpiar para borrar los campos y restaurar estado inicial.
+     * En modo edición deja bloqueada la cédula, solo la limpia si es nuevo paciente.
+     * 
+     * @param evt evento de acción
+     */
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         if (paciente == null) {
         txtCedula.setText("");  // Solo borra la cédula si estás creando un paciente nuevo
@@ -270,7 +286,13 @@ public class FormularioPacientes extends javax.swing.JInternalFrame {
     private void txtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTelefonoActionPerformed
-
+    /**
+     * Acción del botón guardar para crear o actualizar un paciente.
+     * Crea un nuevo paciente con los datos ingresados y lo guarda o actualiza en el servicio.
+     * Cierra el formulario tras la operación.
+     * 
+     * @param evt evento de acción
+     */
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         Paciente p = new Paciente(
             txtCedula.getText(),

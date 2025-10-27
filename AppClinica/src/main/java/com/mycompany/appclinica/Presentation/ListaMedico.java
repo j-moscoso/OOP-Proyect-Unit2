@@ -13,13 +13,17 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
+ * Interfaz gráfica para mostrar y gestionar la lista de médicos.
+ * Permite crear, buscar, editar, eliminar médicos y refrescar la lista.
+ * Utiliza servicio de médicos para operaciones sobre datos.
+ * 
  * @author Juan Moscoso y Slleider Rojas
  */
 public class ListaMedico extends javax.swing.JInternalFrame {
     private MedicoService medicoService;
     /**
-     * Creates new form ListaPacientes
+     * Constructor que inicializa la ventana con el servicio de médicos.
+     * @param medicoService Servicio para gestión de médicos
      */
     public ListaMedico(MedicoService medicoService) {
         this.medicoService = medicoService;
@@ -219,7 +223,12 @@ public class ListaMedico extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Acción para crear un nuevo médico.
+     * Abre el formulario de creación de médico en modo creación y centrado.
+     * 
+     * @param evt evento de acción
+     */
     private void buttonCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCrearActionPerformed
         FormulariosMedicos form = new FormulariosMedicos(medicoService, null);
         getParent().add(form); // Abrir en el desktopPane
@@ -229,7 +238,12 @@ public class ListaMedico extends javax.swing.JInternalFrame {
         int y = (getParent().getHeight() - form.getHeight()) / 2;
         form.setLocation(x, y);
     }//GEN-LAST:event_buttonCrearActionPerformed
-
+    /**
+     * Busca médicos por cédula o nombre según el texto ingresado en el campo de búsqueda.
+     * Actualiza la tabla con los resultados encontrados.
+     * 
+     * @param evt evento de acción
+     */
     private void buttonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBuscarActionPerformed
         String texto = textFieldBuscar.getText().trim();
         List<Medico> resultados;
@@ -259,7 +273,11 @@ public class ListaMedico extends javax.swing.JInternalFrame {
             });
         }
     }//GEN-LAST:event_buttonBuscarActionPerformed
-
+    /**
+     * Refresca la tabla mostrando todos los médicos registrados.
+     * 
+     * @param evt evento de acción
+     */
     private void buttonRefresacarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRefresacarActionPerformed
         DefaultTableModel model = (DefaultTableModel) tableDatosMedicos.getModel();
         model.setRowCount(0);
@@ -276,7 +294,12 @@ public class ListaMedico extends javax.swing.JInternalFrame {
             });
         }
     }//GEN-LAST:event_buttonRefresacarActionPerformed
-
+    /**
+     * Elimina el médico seleccionado en la tabla.
+     * Muestra mensajes de confirmación o error según corresponda.
+     * 
+     * @param evt evento de acción
+     */
     private void buttonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEliminarActionPerformed
         int fila = tableDatosMedicos.getSelectedRow();
         if (fila != -1) {
@@ -292,11 +315,20 @@ public class ListaMedico extends javax.swing.JInternalFrame {
     private void textFieldBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldBuscarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textFieldBuscarActionPerformed
-
+    /**
+     * Cierra la ventana de lista de médicos.
+     * 
+     * @param evt evento de acción
+     */
     private void jButtonSalir3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalir3ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButtonSalir3ActionPerformed
-
+    /**
+     * Abre el formulario para editar el médico seleccionado.
+     * Si no hay selección muestra un mensaje de error.
+     * 
+     * @param evt evento de acción
+     */
     private void buttonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditarActionPerformed
         int fila = tableDatosMedicos.getSelectedRow();
         if (fila != -1) {

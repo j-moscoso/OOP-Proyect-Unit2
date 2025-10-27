@@ -16,7 +16,11 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
+ * Interfaz gráfica para gestionar la lista de pacientes.
+ * Permite buscar pacientes por cédula o nombre, crear, editar, eliminar
+ * y visualizar las citas asociadas a un paciente.
+ * Trabaja con servicios para interacción con datos.
+ * 
  * @author Juan Moscoso y Slleider Rojas
  */
 public class ListaPaciente extends javax.swing.JInternalFrame {
@@ -24,8 +28,11 @@ public class ListaPaciente extends javax.swing.JInternalFrame {
     private MedicoService medicoService;
     private CitaService citaService;
     /**
-     * Creates new form ListaPaciente
-     * @param pacienteService
+     * Constructor que inicializa la ventana con los servicios necesarios.
+     * 
+     * @param pacienteService Servicio de pacientes
+     * @param medicoService Servicio de médicos
+     * @param citaService Servicio de citas
      */
     public ListaPaciente(PacienteService pacienteService, MedicoService medicoService, CitaService citaService) {
         this.pacienteService = pacienteService;
@@ -379,7 +386,12 @@ public class ListaPaciente extends javax.swing.JInternalFrame {
     private void textFieldBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldBuscarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textFieldBuscarActionPerformed
-
+    /**
+     * Acción para abrir el formulario para crear un nuevo paciente.
+     * Centra el formulario en la ventana padre.
+     * 
+     * @param evt evento de acción
+     */
     private void buttonCrear2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCrear2ActionPerformed
         FormularioPacientes form = new FormularioPacientes(pacienteService, null);
         getParent().add(form); // Abrir en el desktopPane
@@ -389,7 +401,12 @@ public class ListaPaciente extends javax.swing.JInternalFrame {
         int y = (getParent().getHeight() - form.getHeight()) / 2;
         form.setLocation(x, y);
     }//GEN-LAST:event_buttonCrear2ActionPerformed
-
+    /**
+     * Busca pacientes por cédula si el texto es numérico, o por nombre en otro caso.
+     * Actualiza la tabla mostrando los resultados encontrados.
+     * 
+     * @param evt evento de acción
+     */
     private void buttonBuscar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBuscar2ActionPerformed
         String texto = textFieldBuscar2.getText().trim();
         List<Paciente> resultados;
@@ -419,7 +436,11 @@ public class ListaPaciente extends javax.swing.JInternalFrame {
             });
         }
     }//GEN-LAST:event_buttonBuscar2ActionPerformed
-
+    /**
+     * Refresca la tabla para mostrar todos los pacientes registrados.
+     * 
+     * @param evt evento de acción
+     */
     private void buttonRefresacar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRefresacar2ActionPerformed
         DefaultTableModel model = (DefaultTableModel) tableDatosPaciente.getModel();
         model.setRowCount(0);
@@ -436,7 +457,13 @@ public class ListaPaciente extends javax.swing.JInternalFrame {
             });
         }
     }//GEN-LAST:event_buttonRefresacar2ActionPerformed
-
+    /**
+     * Permite ver las citas del paciente seleccionado.
+     * Abre la ventana ListaCitas mostrando solo las citas del paciente.
+     * Pide selección previa y muestra mensaje si no se selecciona paciente.
+     * 
+     * @param evt evento de acción
+     */
     private void buttonVerCitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonVerCitasActionPerformed
         int fila = tableDatosPaciente.getSelectedRow();
         if (fila != -1) {
@@ -454,7 +481,11 @@ public class ListaPaciente extends javax.swing.JInternalFrame {
     private void textFieldBuscar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldBuscar2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textFieldBuscar2ActionPerformed
-
+    /**
+     * Elimina el paciente seleccionado, muestra confirmación y refresca tabla.
+     * 
+     * @param evt evento de acción
+     */
     private void buttonEliminar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEliminar2ActionPerformed
         int fila = tableDatosPaciente.getSelectedRow();
         if (fila != -1) {
@@ -466,11 +497,20 @@ public class ListaPaciente extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Seleccione un paciente para eliminar");
         }
     }//GEN-LAST:event_buttonEliminar2ActionPerformed
-
+    /**
+     * Cierra la ventana lista de pacientes.
+     * 
+     * @param evt evento de acción
+     */
     private void jButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalirActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButtonSalirActionPerformed
-
+    /**
+     * Abre el formulario para editar el paciente seleccionado.
+     * Pide selección previa y muestra mensaje si no se selecciona paciente.
+     * 
+     * @param evt evento de acción
+     */
     private void buttonEditar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditar2ActionPerformed
         int fila = tableDatosPaciente.getSelectedRow();
         if (fila != -1) {
