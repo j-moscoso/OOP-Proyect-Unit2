@@ -117,42 +117,73 @@ public class Paciente {
     }
 
     // Getters y Setters
+    /**
+     * Obtiene la cédula del paciente.
+     * @return la cédula actual
+     */
     public String getCedula() {
         return cedula;
     }
-
+    /**
+     * Establece la cédula del paciente.
+     * @param cedula Nuevo valor de cédula
+     */
     public void setCedula(String cedula) {
         this.cedula = cedula;
     }
-
+    /**
+     * Obtiene el nombre del paciente.
+     * @return el nombre actual
+     */
     public String getNombre() {
         return nombre;
     }
-
+    /**
+     * Establece el nombre del paciente.
+     * @param nombre nuevo nombre a asignar
+     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
+    /**
+     * Obtiene el apellido del paciente.
+     * @return el apellido actual
+     */
     public String getApellido() {
         return apellido;
     }
-
+    /**
+     * Establece el apellido del paciente.
+     * @param apellido nuevo apellido a asignar
+     */
     public void setApellido(String apellido) {
         this.apellido = apellido;
     }
-
+    /**
+     * Obtiene el teléfono de contacto del paciente.
+     * @return el teléfono actual
+     */
     public String getTelefono() {
         return telefono;
     }
-
+    /**
+     * Establece el teléfono de contacto del paciente.
+     * @param telefono nuevo teléfono a asignar
+     */
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
-
+    /**
+     * Obtiene la fecha de nacimiento del paciente.
+     * @return la fecha de nacimiento actual
+     */
     public LocalDate getFechaNacimiento() {
         return fechaNacimiento;
     }
-
+    /**
+     * Establece la fecha de nacimiento del paciente.
+     * @param fechaNacimiento nueva fecha de nacimiento
+     */
     public void setFechaNacimiento(LocalDate fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
@@ -164,7 +195,12 @@ public class Paciente {
     public String getId() {
         return this.cedula;
     }
-
+    /**
+     * Compara este paciente con otro objeto.
+     * Solo retorna true si la cédula es igual.
+     * @param obj Objeto con el que se compara
+     * @return true si ambos pacientes tienen la misma cédula
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
@@ -172,7 +208,10 @@ public class Paciente {
         Paciente paciente = (Paciente) obj;
         return cedula != null && cedula.equals(paciente.cedula);
     }
-
+    /**
+     * Genera código hash basado en la cédula del paciente.
+     * @return código hash
+     */
     @Override
     public int hashCode() {
         return cedula != null ? cedula.hashCode() : 0;

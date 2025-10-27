@@ -1,4 +1,4 @@
-/*
+    /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
@@ -107,42 +107,78 @@ public class Medico {
     }
 
     // Getters y Setters
+    
+    /**
+     * Obtiene la cédula del médico.
+     * @return la cédula actual
+     */
     public String getCedula() {
         return cedula;
     }
-
+    
+    /**
+     * Establece la cédula del médico.
+     * @param cedula Nuevo valor de cédula
+     */
     public void setCedula(String cedula) {
         this.cedula = cedula;
     }
+    
+    /**
+     * Obtiene el nombre del médico.
+     * @return el nombre actual
+     */
 
     public String getNombre() {
         return nombre;
     }
-
+    /**
+     * Establece el nombre del médico.
+     * @param nombre nuevo nombre a asignar
+     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
+    /**
+     * Obtiene el apellido del médico.
+     * @return el apellido actual
+     */
     public String getApellido() {
         return apellido;
     }
-
+    
+    /**
+     * Establece el apellido del médico.
+     * @param apellido nuevo apellido a asignar
+     */
     public void setApellido(String apellido) {
         this.apellido = apellido;
     }
-
+    /**
+     * Obtiene la especialidad médica.
+     * @return especialidad actual
+     */
     public EnumEspecialidad getEspecialidad() {
         return especialidad;
     }
-
+    /**
+     * Establece la especialidad médica.
+     * @param especialidad nueva especialidad a asignar
+     */
     public void setEspecialidad(EnumEspecialidad especialidad) {
         this.especialidad = especialidad;
     }
-
+    /**
+     * Obtiene el teléfono de contacto del médico.
+     * @return el teléfono actual
+     */
     public String getTelefono() {
         return telefono;
     }
-
+     /**
+     * Establece el teléfono de contacto del médico.
+     * @param telefono nuevo teléfono a asignar
+     */
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
@@ -167,7 +203,11 @@ public class Medico {
         Medico medico = (Medico) obj;
         return cedula != null && cedula.equals(medico.cedula);
     }
-
+    
+    /**
+     * Genera código hash basado en la cédula del médico.
+     * @return código hash
+     */
     @Override
     public int hashCode() {
         return cedula != null ? cedula.hashCode():0;

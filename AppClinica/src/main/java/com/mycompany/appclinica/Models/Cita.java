@@ -206,54 +206,99 @@ public class Cita {
     }
 
     // Getters y Setters
+    
+    /**
+     * Obtiene el ID de la cita.
+     * @return ID actual
+     */
     public String getId() {
         return id;
     }
-
+    
+    /**
+    * Establece el ID de la cita.
+    * @param id Nuevo ID a asignar
+    */
     public void setId(String id) {
         this.id = id;
     }
-
+       
+     /**
+     * Obtiene el paciente asociado a la cita.
+     * @return paciente actual
+     */
     public Paciente getPaciente() {
         return paciente;
     }
-
+    
+    /**
+    * Establece el paciente asociado a la cita.
+    * @param paciente Nuevo paciente a asignar
+    */
     public void setPaciente(Paciente paciente) {
         this.paciente = paciente;
     }
-
+    /**
+     * Obtiene el médico asignado a la cita.
+     * @return médico actual
+     */
     public Medico getMedico() {
-        return medico;
+        return medico;  
     }
-
+    /**
+     * Establece el médico asignado a la cita.
+     * @param medico Nuevo médico a asignar
+     */
     public void setMedico(Medico medico) {
         this.medico = medico;
     }
-
+    /**
+     * Obtiene el motivo de la consulta.
+     * @return motivo actual
+     */
     public String getMotivo() {
         return motivo;
     }
-
+    /**
+     * Establece el motivo de la consulta.
+     * @param motivo Nuevo motivo a asignar
+     */
     public void setMotivo(String motivo) {
         this.motivo = motivo;
     }
-
+    /**
+     * Obtiene el estado actual de la cita.
+     * @return estado actual
+     */
     public EnumEstadoCita getEstado() {
         return estado;
     }
-
+    /**
+     * Establece el estado de la cita.
+     * @param estado Nuevo estado a asignar
+     */
     public void setEstado(EnumEstadoCita estado) {
         this.estado = estado;
     }
-
+    /**
+     * Obtiene la fecha y hora programada para la cita.
+     * @return fecha programada
+     */ 
     public LocalDateTime getFecha() {
         return fecha;
     }
-
+    /**
+     * Establece la fecha y hora programada para la cita.
+     * @param fecha Nueva fecha a asignar
+     */
     public void setFecha(LocalDateTime fecha) {
         this.fecha = fecha;
     }
-
+    /**
+     * Compara esta cita con otro objeto.
+     * @param obj Objeto con el que se compara
+     * @return true si ambos son instancias de Cita con el mismo ID
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -265,7 +310,10 @@ public class Cita {
         Cita cita = (Cita) obj;
         return id != null && id.equals(cita.id);
     }
-
+    /**
+     * Genera código hash basado en el ID de la cita.
+     * @return código hash
+     */
     @Override
     public int hashCode() {
         return id != null ? id.hashCode() : 0;
