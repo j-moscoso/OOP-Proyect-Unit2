@@ -38,7 +38,6 @@ public class ListaMedico extends javax.swing.JInternalFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
-        labelMedicos = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableDatosMedicos = new javax.swing.JTable();
         buttonCrear = new javax.swing.JButton();
@@ -47,17 +46,16 @@ public class ListaMedico extends javax.swing.JInternalFrame {
         buttonEliminar = new javax.swing.JButton();
         buttonEditar = new javax.swing.JButton();
         textFieldBuscar = new javax.swing.JTextField();
-        jButtonSalir3 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        labelMedicos = new javax.swing.JLabel();
+        jButtonSalir3 = new javax.swing.JButton();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane2.setViewportView(jTextArea1);
 
         jLabel1.setText("jLabel1");
-
-        labelMedicos.setFont(new java.awt.Font("Microsoft Tai Le", 1, 24)); // NOI18N
-        labelMedicos.setText("Médicos");
 
         tableDatosMedicos.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
         tableDatosMedicos.setModel(new javax.swing.table.DefaultTableModel(
@@ -73,7 +71,9 @@ public class ListaMedico extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(tableDatosMedicos);
 
-        buttonCrear.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
+        buttonCrear.setBackground(new java.awt.Color(253, 253, 253));
+        buttonCrear.setFont(new java.awt.Font("Microsoft Tai Le", 1, 16)); // NOI18N
+        buttonCrear.setForeground(new java.awt.Color(46, 71, 86));
         buttonCrear.setText("Crear");
         buttonCrear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -81,16 +81,19 @@ public class ListaMedico extends javax.swing.JInternalFrame {
             }
         });
 
-        buttonBuscar.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
+        buttonBuscar.setBackground(new java.awt.Color(253, 253, 253));
+        buttonBuscar.setFont(new java.awt.Font("Microsoft Tai Le", 1, 16)); // NOI18N
+        buttonBuscar.setForeground(new java.awt.Color(46, 71, 86));
         buttonBuscar.setText("Buscar");
-        buttonBuscar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         buttonBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonBuscarActionPerformed(evt);
             }
         });
 
-        buttonRefresacar.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
+        buttonRefresacar.setBackground(new java.awt.Color(253, 253, 253));
+        buttonRefresacar.setFont(new java.awt.Font("Microsoft Tai Le", 1, 16)); // NOI18N
+        buttonRefresacar.setForeground(new java.awt.Color(46, 71, 86));
         buttonRefresacar.setText("Refrescar");
         buttonRefresacar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -98,7 +101,9 @@ public class ListaMedico extends javax.swing.JInternalFrame {
             }
         });
 
+        buttonEliminar.setBackground(new java.awt.Color(255, 51, 51));
         buttonEliminar.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
+        buttonEliminar.setForeground(new java.awt.Color(255, 255, 255));
         buttonEliminar.setText("Eliminar");
         buttonEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -106,7 +111,9 @@ public class ListaMedico extends javax.swing.JInternalFrame {
             }
         });
 
+        buttonEditar.setBackground(new java.awt.Color(253, 253, 253));
         buttonEditar.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
+        buttonEditar.setForeground(new java.awt.Color(46, 71, 86));
         buttonEditar.setText("Editar");
         buttonEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -121,7 +128,19 @@ public class ListaMedico extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(46, 71, 86));
+        jLabel2.setText("Ingrese la cédula:");
+
+        jPanel1.setBackground(new java.awt.Color(30, 107, 117));
+
+        labelMedicos.setFont(new java.awt.Font("Microsoft Tai Le", 1, 36)); // NOI18N
+        labelMedicos.setForeground(new java.awt.Color(255, 255, 255));
+        labelMedicos.setText("Médicos");
+
+        jButtonSalir3.setBackground(new java.awt.Color(255, 51, 51));
         jButtonSalir3.setFont(new java.awt.Font("Microsoft New Tai Lue", 1, 18)); // NOI18N
+        jButtonSalir3.setForeground(new java.awt.Color(255, 255, 255));
         jButtonSalir3.setText("x");
         jButtonSalir3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -129,15 +148,34 @@ public class ListaMedico extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel2.setText("Ingrese la cédula:");
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(labelMedicos, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonSalir3)
+                .addGap(14, 14, 14))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(14, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelMedicos, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonSalir3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(23, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(textFieldBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -153,28 +191,18 @@ public class ListaMedico extends javax.swing.JInternalFrame {
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel2)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(buttonCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(labelMedicos, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonSalir3))))
-                .addContainerGap(15, Short.MAX_VALUE))
+                            .addComponent(buttonCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(14, 14, 14))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(labelMedicos))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButtonSalir3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(buttonCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(textFieldBuscar, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -186,7 +214,7 @@ public class ListaMedico extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(buttonEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(buttonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         pack();
@@ -196,6 +224,10 @@ public class ListaMedico extends javax.swing.JInternalFrame {
         FormulariosMedicos form = new FormulariosMedicos(medicoService, null);
         getParent().add(form); // Abrir en el desktopPane
         form.setVisible(true);
+        
+        int x = (getParent().getWidth() - form.getWidth()) / 2;
+        int y = (getParent().getHeight() - form.getHeight()) / 2;
+        form.setLocation(x, y);
     }//GEN-LAST:event_buttonCrearActionPerformed
 
     private void buttonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBuscarActionPerformed
@@ -290,6 +322,7 @@ public class ListaMedico extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButtonSalir3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;

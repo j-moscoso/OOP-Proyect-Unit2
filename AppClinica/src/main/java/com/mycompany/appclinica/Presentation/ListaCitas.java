@@ -43,7 +43,6 @@ public class ListaCitas extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        labelCitas = new javax.swing.JLabel();
         buttomCrear3 = new javax.swing.JButton();
         textFieldBuscar3 = new javax.swing.JTextField();
         buttonBuscar3 = new javax.swing.JButton();
@@ -54,15 +53,16 @@ public class ListaCitas extends javax.swing.JInternalFrame {
         buttonCancelar = new javax.swing.JButton();
         buttonConfirmar = new javax.swing.JButton();
         buttonCompletar2 = new javax.swing.JButton();
-        jButtonSalir2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         buttonRefrescar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jButtonSalir2 = new javax.swing.JButton();
+        labelCitas = new javax.swing.JLabel();
 
-        labelCitas.setFont(new java.awt.Font("Microsoft Tai Le", 1, 24)); // NOI18N
-        labelCitas.setText("Citas");
-
-        buttomCrear3.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
+        buttomCrear3.setBackground(new java.awt.Color(249, 249, 249));
+        buttomCrear3.setFont(new java.awt.Font("Microsoft Tai Le", 1, 18)); // NOI18N
+        buttomCrear3.setForeground(new java.awt.Color(46, 71, 86));
         buttomCrear3.setText("Crear");
         buttomCrear3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -77,9 +77,10 @@ public class ListaCitas extends javax.swing.JInternalFrame {
             }
         });
 
-        buttonBuscar3.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
+        buttonBuscar3.setBackground(new java.awt.Color(249, 249, 249));
+        buttonBuscar3.setFont(new java.awt.Font("Microsoft Tai Le", 1, 16)); // NOI18N
+        buttonBuscar3.setForeground(new java.awt.Color(46, 71, 86));
         buttonBuscar3.setText("Buscar");
-        buttonBuscar3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         buttonBuscar3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonBuscar3ActionPerformed(evt);
@@ -100,7 +101,9 @@ public class ListaCitas extends javax.swing.JInternalFrame {
         ));
         jScrollPane2.setViewportView(tableListaCitas);
 
-        buttonEditar3.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
+        buttonEditar3.setBackground(new java.awt.Color(249, 249, 249));
+        buttonEditar3.setFont(new java.awt.Font("Microsoft Tai Le", 1, 16)); // NOI18N
+        buttonEditar3.setForeground(new java.awt.Color(46, 71, 86));
         buttonEditar3.setText("Editar");
         buttonEditar3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -109,7 +112,7 @@ public class ListaCitas extends javax.swing.JInternalFrame {
         });
 
         buttonEliminar3.setBackground(new java.awt.Color(255, 0, 0));
-        buttonEliminar3.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
+        buttonEliminar3.setFont(new java.awt.Font("Microsoft Tai Le", 1, 16)); // NOI18N
         buttonEliminar3.setForeground(new java.awt.Color(255, 255, 255));
         buttonEliminar3.setText("Eliminar");
         buttonEliminar3.addActionListener(new java.awt.event.ActionListener() {
@@ -118,7 +121,9 @@ public class ListaCitas extends javax.swing.JInternalFrame {
             }
         });
 
+        buttonCancelar.setBackground(new java.awt.Color(249, 249, 249));
         buttonCancelar.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
+        buttonCancelar.setForeground(new java.awt.Color(46, 71, 86));
         buttonCancelar.setText("Cancelar");
         buttonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -126,7 +131,9 @@ public class ListaCitas extends javax.swing.JInternalFrame {
             }
         });
 
+        buttonConfirmar.setBackground(new java.awt.Color(249, 249, 249));
         buttonConfirmar.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
+        buttonConfirmar.setForeground(new java.awt.Color(46, 71, 86));
         buttonConfirmar.setText("Confirmar");
         buttonConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -134,13 +141,41 @@ public class ListaCitas extends javax.swing.JInternalFrame {
             }
         });
 
+        buttonCompletar2.setBackground(new java.awt.Color(249, 249, 249));
         buttonCompletar2.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
+        buttonCompletar2.setForeground(new java.awt.Color(46, 71, 86));
         buttonCompletar2.setText("Completar");
         buttonCompletar2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonCompletar2ActionPerformed(evt);
             }
         });
+
+        jButton1.setBackground(new java.awt.Color(249, 249, 249));
+        jButton1.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(46, 71, 86));
+        jButton1.setText("No Asistió");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        buttonRefrescar.setBackground(new java.awt.Color(249, 249, 249));
+        buttonRefrescar.setFont(new java.awt.Font("Microsoft Tai Le", 1, 16)); // NOI18N
+        buttonRefrescar.setForeground(new java.awt.Color(46, 71, 86));
+        buttonRefrescar.setText("Refrescar");
+        buttonRefrescar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonRefrescarActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(46, 71, 86));
+        jLabel1.setText("Ingrese su cédula:");
+
+        jPanel1.setBackground(new java.awt.Color(30, 107, 117));
 
         jButtonSalir2.setBackground(new java.awt.Color(255, 0, 0));
         jButtonSalir2.setFont(new java.awt.Font("Microsoft New Tai Lue", 1, 18)); // NOI18N
@@ -152,24 +187,30 @@ public class ListaCitas extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
-        jButton1.setText("No Asistió");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
+        labelCitas.setFont(new java.awt.Font("Microsoft Tai Le", 1, 36)); // NOI18N
+        labelCitas.setForeground(new java.awt.Color(255, 255, 255));
+        labelCitas.setText("Citas");
 
-        buttonRefrescar.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
-        buttonRefrescar.setText("Refrescar");
-        buttonRefrescar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonRefrescarActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel1.setText("Ingrese su cédula:");
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(labelCitas, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonSalir2)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButtonSalir2)
+                    .addComponent(labelCitas, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(25, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -179,6 +220,19 @@ public class ListaCitas extends javax.swing.JInternalFrame {
                 .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(buttomCrear3, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(textFieldBuscar3, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30)
+                                .addComponent(buttonBuscar3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(buttonRefrescar))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(buttonEditar3, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -191,42 +245,23 @@ public class ListaCitas extends javax.swing.JInternalFrame {
                         .addComponent(buttonCompletar2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 282, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(labelCitas, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonSalir2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(buttomCrear3, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(textFieldBuscar3, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(buttonBuscar3, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(buttonRefrescar)))))
+                        .addGap(0, 282, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(9, 9, 9)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonSalir2)
-                    .addComponent(labelCitas))
-                .addGap(18, 18, 18)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
                 .addComponent(jLabel1)
                 .addGap(5, 5, 5)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buttomCrear3, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+                    .addComponent(buttomCrear3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(textFieldBuscar3)
-                    .addComponent(buttonBuscar3)
+                    .addComponent(buttonBuscar3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonRefrescar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -247,6 +282,10 @@ public class ListaCitas extends javax.swing.JInternalFrame {
         FormularioCitas form = new FormularioCitas(this.pacienteService, this.medicoService, this.citaService, null);
         getParent().add(form); // Abrir en el desktopPane
         form.setVisible(true);
+        
+        int x = (getParent().getWidth() - form.getWidth()) / 2;
+        int y = (getParent().getHeight() - form.getHeight()) / 2;
+        form.setLocation(x, y);
     }//GEN-LAST:event_buttomCrear3ActionPerformed
 
     private void textFieldBuscar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldBuscar3ActionPerformed
@@ -408,6 +447,7 @@ public class ListaCitas extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonSalir2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel labelCitas;
     private javax.swing.JTable tableListaCitas;

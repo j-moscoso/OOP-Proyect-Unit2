@@ -53,7 +53,6 @@ public class ListaPaciente extends javax.swing.JInternalFrame {
         buttonEliminar = new javax.swing.JButton();
         buttonEditar = new javax.swing.JButton();
         textFieldBuscar = new javax.swing.JTextField();
-        labelPaciente = new javax.swing.JLabel();
         buttonCrear2 = new javax.swing.JButton();
         buttonBuscar2 = new javax.swing.JButton();
         buttonRefresacar2 = new javax.swing.JButton();
@@ -63,8 +62,10 @@ public class ListaPaciente extends javax.swing.JInternalFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tableDatosPaciente = new javax.swing.JTable();
         buttonEliminar2 = new javax.swing.JButton();
-        jButtonSalir = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        labelPaciente = new javax.swing.JLabel();
+        jButtonSalir = new javax.swing.JButton();
 
         labelMedicos.setFont(new java.awt.Font("Microsoft Tai Le", 1, 18)); // NOI18N
         labelMedicos.setText("Médicos");
@@ -173,10 +174,9 @@ public class ListaPaciente extends javax.swing.JInternalFrame {
                 .addGap(23, 23, 23))
         );
 
-        labelPaciente.setFont(new java.awt.Font("Microsoft Tai Le", 1, 24)); // NOI18N
-        labelPaciente.setText("Paciente");
-
-        buttonCrear2.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
+        buttonCrear2.setBackground(new java.awt.Color(252, 252, 252));
+        buttonCrear2.setFont(new java.awt.Font("Microsoft Tai Le", 1, 16)); // NOI18N
+        buttonCrear2.setForeground(new java.awt.Color(46, 71, 86));
         buttonCrear2.setText("Crear");
         buttonCrear2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -184,16 +184,19 @@ public class ListaPaciente extends javax.swing.JInternalFrame {
             }
         });
 
-        buttonBuscar2.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
+        buttonBuscar2.setBackground(new java.awt.Color(252, 252, 252));
+        buttonBuscar2.setFont(new java.awt.Font("Microsoft Tai Le", 1, 16)); // NOI18N
+        buttonBuscar2.setForeground(new java.awt.Color(46, 71, 86));
         buttonBuscar2.setText("Buscar");
-        buttonBuscar2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         buttonBuscar2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonBuscar2ActionPerformed(evt);
             }
         });
 
-        buttonRefresacar2.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
+        buttonRefresacar2.setBackground(new java.awt.Color(252, 252, 252));
+        buttonRefresacar2.setFont(new java.awt.Font("Microsoft Tai Le", 1, 16)); // NOI18N
+        buttonRefresacar2.setForeground(new java.awt.Color(46, 71, 86));
         buttonRefresacar2.setText("Refrescar");
         buttonRefresacar2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -201,7 +204,9 @@ public class ListaPaciente extends javax.swing.JInternalFrame {
             }
         });
 
+        buttonVerCitas.setBackground(new java.awt.Color(252, 252, 252));
         buttonVerCitas.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
+        buttonVerCitas.setForeground(new java.awt.Color(46, 71, 86));
         buttonVerCitas.setText("Ver Citas");
         buttonVerCitas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -209,7 +214,9 @@ public class ListaPaciente extends javax.swing.JInternalFrame {
             }
         });
 
+        buttonEditar2.setBackground(new java.awt.Color(252, 252, 252));
         buttonEditar2.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
+        buttonEditar2.setForeground(new java.awt.Color(46, 71, 86));
         buttonEditar2.setText("Editar");
         buttonEditar2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -238,7 +245,9 @@ public class ListaPaciente extends javax.swing.JInternalFrame {
         ));
         jScrollPane2.setViewportView(tableDatosPaciente);
 
+        buttonEliminar2.setBackground(new java.awt.Color(255, 51, 51));
         buttonEliminar2.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
+        buttonEliminar2.setForeground(new java.awt.Color(255, 255, 255));
         buttonEliminar2.setText("Eliminar");
         buttonEliminar2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -246,7 +255,20 @@ public class ListaPaciente extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(46, 71, 86));
+        jLabel1.setText("Ingrese la cédula:");
+
+        jPanel1.setBackground(new java.awt.Color(30, 107, 117));
+
+        labelPaciente.setBackground(new java.awt.Color(255, 255, 255));
+        labelPaciente.setFont(new java.awt.Font("Microsoft Tai Le", 1, 36)); // NOI18N
+        labelPaciente.setForeground(new java.awt.Color(255, 255, 255));
+        labelPaciente.setText("Paciente");
+
+        jButtonSalir.setBackground(new java.awt.Color(255, 51, 51));
         jButtonSalir.setFont(new java.awt.Font("Microsoft New Tai Lue", 1, 18)); // NOI18N
+        jButtonSalir.setForeground(new java.awt.Color(255, 255, 255));
         jButtonSalir.setText("x");
         jButtonSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -254,56 +276,69 @@ public class ListaPaciente extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel1.setText("Ingrese la cédula:");
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(labelPaciente)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonSalir)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(15, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelPaciente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButtonSalir)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(buttonEditar2, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(buttonEliminar2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(buttonVerCitas, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 677, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(textFieldBuscar2, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(37, 37, 37)
-                                    .addComponent(buttonBuscar2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(jLabel1)
-                                    .addGap(463, 463, 463)))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(buttonRefresacar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(buttonCrear2, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(buttonEditar2, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(buttonEliminar2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(buttonVerCitas, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 677, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(labelPaciente)
-                        .addGap(550, 550, 550)
-                        .addComponent(jButtonSalir)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(textFieldBuscar2, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(37, 37, 37)
+                                .addComponent(buttonBuscar2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(buttonRefresacar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(buttonCrear2, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(27, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonSalir)
-                    .addComponent(labelPaciente))
-                .addGap(29, 29, 29)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(buttonCrear2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(textFieldBuscar2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -349,6 +384,10 @@ public class ListaPaciente extends javax.swing.JInternalFrame {
         FormularioPacientes form = new FormularioPacientes(pacienteService, null);
         getParent().add(form); // Abrir en el desktopPane
         form.setVisible(true);
+        
+        int x = (getParent().getWidth() - form.getWidth()) / 2;
+        int y = (getParent().getHeight() - form.getHeight()) / 2;
+        form.setLocation(x, y);
     }//GEN-LAST:event_buttonCrear2ActionPerformed
 
     private void buttonBuscar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBuscar2ActionPerformed
@@ -463,6 +502,7 @@ public class ListaPaciente extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButtonSalir;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel labelMedicos;

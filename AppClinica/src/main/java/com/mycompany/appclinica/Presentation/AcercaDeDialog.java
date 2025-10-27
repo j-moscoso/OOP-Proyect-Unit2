@@ -27,7 +27,6 @@ public class AcercaDeDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        labelAppClinica = new javax.swing.JLabel();
         labelAutores = new javax.swing.JLabel();
         autor1 = new javax.swing.JLabel();
         autor2 = new javax.swing.JLabel();
@@ -37,36 +36,41 @@ public class AcercaDeDialog extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         textDescripcion = new javax.swing.JTextArea();
         buttonCerrar = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        labelAppClinica = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        labelAppClinica.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        labelAppClinica.setText("App Clinica v1.0");
-
         labelAutores.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        labelAutores.setForeground(new java.awt.Color(46, 71, 86));
         labelAutores.setText("Autores:");
 
         autor1.setFont(new java.awt.Font("Microsoft Tai Le", 1, 18)); // NOI18N
+        autor1.setForeground(new java.awt.Color(46, 71, 86));
         autor1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         autor1.setText("Juan Manuel Moscoso Torres");
         autor1.setToolTipText("");
 
         autor2.setFont(new java.awt.Font("Microsoft Tai Le", 1, 18)); // NOI18N
+        autor2.setForeground(new java.awt.Color(46, 71, 86));
         autor2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         autor2.setText("Slleider David Rojas Aleman");
         autor2.setToolTipText("");
 
         autor3.setFont(new java.awt.Font("Microsoft Tai Le", 1, 18)); // NOI18N
+        autor3.setForeground(new java.awt.Color(46, 71, 86));
         autor3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         autor3.setText("Samuel Castaño Arenas");
         autor3.setToolTipText("");
 
         autor4.setFont(new java.awt.Font("Microsoft Tai Le", 1, 18)); // NOI18N
+        autor4.setForeground(new java.awt.Color(46, 71, 86));
         autor4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         autor4.setText("Alejandro Toro Bueno");
         autor4.setToolTipText("");
 
         autor5.setFont(new java.awt.Font("Microsoft Tai Le", 1, 18)); // NOI18N
+        autor5.setForeground(new java.awt.Color(46, 71, 86));
         autor5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         autor5.setText("Héctor Julian Ospina");
         autor5.setToolTipText("");
@@ -77,7 +81,9 @@ public class AcercaDeDialog extends javax.swing.JDialog {
         textDescripcion.setText("Aplicación de escritorio para gestionar \nlas consultas médicas en una clínica. \nPermitiendo registrar pacientes, médicos, \nespecialidades, agendar citas, y llevar un \nhistorial básico de consultas.");
         jScrollPane1.setViewportView(textDescripcion);
 
-        buttonCerrar.setFont(new java.awt.Font("Microsoft Tai Le", 1, 14)); // NOI18N
+        buttonCerrar.setBackground(new java.awt.Color(220, 53, 69));
+        buttonCerrar.setFont(new java.awt.Font("Microsoft Tai Le", 1, 18)); // NOI18N
+        buttonCerrar.setForeground(new java.awt.Color(255, 255, 255));
         buttonCerrar.setText("Cerrar");
         buttonCerrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,47 +91,59 @@ public class AcercaDeDialog extends javax.swing.JDialog {
             }
         });
 
+        jPanel1.setBackground(new java.awt.Color(30, 107, 117));
+
+        labelAppClinica.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        labelAppClinica.setForeground(new java.awt.Color(255, 255, 255));
+        labelAppClinica.setText("App Clinica v1.0");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(49, 49, 49)
+                .addComponent(labelAppClinica)
+                .addContainerGap(48, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(labelAppClinica, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(28, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(119, 119, 119)
-                        .addComponent(labelAppClinica))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addComponent(labelAutores, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(autor1)
-                            .addComponent(autor2)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(autor4)
-                                    .addComponent(autor3)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
-                                        .addComponent(autor5)))))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 109, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(buttonCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(207, 207, 207))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(100, 100, 100))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(labelAutores, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(274, 274, 274))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(autor2)
+                                .addComponent(autor1)
+                                .addComponent(autor3)
+                                .addComponent(autor4)
+                                .addComponent(autor5))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(186, 186, 186)
+                        .addComponent(buttonCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(labelAppClinica, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(autor1)
                     .addComponent(labelAutores, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -137,11 +155,11 @@ public class AcercaDeDialog extends javax.swing.JDialog {
                 .addComponent(autor4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(autor5)
-                .addGap(33, 33, 33)
+                .addGap(24, 24, 24)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
-                .addComponent(buttonCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15))
+                .addGap(32, 32, 32)
+                .addComponent(buttonCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21))
         );
 
         pack();
@@ -200,6 +218,7 @@ public class AcercaDeDialog extends javax.swing.JDialog {
     private javax.swing.JLabel autor4;
     private javax.swing.JLabel autor5;
     private javax.swing.JButton buttonCerrar;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelAppClinica;
     private javax.swing.JLabel labelAutores;

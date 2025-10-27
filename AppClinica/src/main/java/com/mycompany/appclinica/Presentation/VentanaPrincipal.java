@@ -58,12 +58,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         );
         desktopPaneLayout.setVerticalGroup(
             desktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 727, Short.MAX_VALUE)
+            .addGap(0, 723, Short.MAX_VALUE)
         );
 
-        panelStatus.setBackground(new java.awt.Color(204, 204, 204));
+        panelStatus.setBackground(new java.awt.Color(30, 107, 117));
 
-        labelStatus.setText("Estado: :)");
+        labelStatus.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        labelStatus.setForeground(new java.awt.Color(255, 255, 255));
+        labelStatus.setText("@2025");
 
         javax.swing.GroupLayout panelStatusLayout = new javax.swing.GroupLayout(panelStatus);
         panelStatus.setLayout(panelStatusLayout);
@@ -82,6 +84,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
+        jMenuBar1.setBackground(new java.awt.Color(30, 107, 117));
+
+        menuPrincipal.setForeground(new java.awt.Color(255, 255, 255));
         menuPrincipal.setText("Menu");
 
         menuArchivo.setText("Archivo");
@@ -167,9 +172,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     
     private void abrirListaPaciente() {
-        ListaPaciente listaPac = new ListaPaciente(pacienteService, medicoService, citaService); // Envia el servicio
-        desktopPane.add(listaPac);
-        listaPac.setVisible(true);
+        
 }
     
     private void menuItemSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemSalirActionPerformed
@@ -183,19 +186,33 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_menuItemAcercaDeActionPerformed
 
     private void menuItemGestionPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemGestionPacienteActionPerformed
-        abrirListaPaciente();
+        ListaPaciente listaPac = new ListaPaciente(pacienteService, medicoService, citaService); // Envia el servicio
+        desktopPane.add(listaPac);
+        listaPac.setVisible(true);
+        
+        int x = (desktopPane.getWidth() - listaPac.getWidth()) / 2;
+        int y = (desktopPane.getHeight() - listaPac.getHeight()) / 2;
+        listaPac.setLocation(x, y);
     }//GEN-LAST:event_menuItemGestionPacienteActionPerformed
 
     private void menuItemGestionMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemGestionMedicoActionPerformed
         ListaMedico listaMed = new ListaMedico(medicoService);
         desktopPane.add(listaMed);
         listaMed.setVisible(true);
+        
+        int x = (desktopPane.getWidth() - listaMed.getWidth()) / 2;
+        int y = (desktopPane.getHeight() - listaMed.getHeight()) / 2;
+        listaMed.setLocation(x, y);
     }//GEN-LAST:event_menuItemGestionMedicoActionPerformed
 
     private void menuItemGestionCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemGestionCitaActionPerformed
         ListaCitas listaCit = new ListaCitas(citaService, medicoService, pacienteService);
         desktopPane.add(listaCit);
         listaCit.setVisible(true);
+        
+        int x = (desktopPane.getWidth() - listaCit.getWidth()) / 2;
+        int y = (desktopPane.getHeight() - listaCit.getHeight()) / 2;
+        listaCit.setLocation(x, y);
     }//GEN-LAST:event_menuItemGestionCitaActionPerformed
 
     /**

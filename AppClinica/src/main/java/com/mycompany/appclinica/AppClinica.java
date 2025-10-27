@@ -15,7 +15,9 @@ public class AppClinica {
         // Lanza la ventana principal del proyecto
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VentanaPrincipal().setVisible(true);
+                VentanaPrincipal ventana = new VentanaPrincipal();
+                ventana.setLocationRelativeTo(null);
+                ventana.setVisible(true);
             }
         });
     }
