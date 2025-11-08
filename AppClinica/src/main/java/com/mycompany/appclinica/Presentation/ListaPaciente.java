@@ -392,14 +392,29 @@ public class ListaPaciente extends javax.swing.JInternalFrame {
      * 
      * @param evt evento de acción
      */
+    private FormularioPacientes formCrearPaciente = null;
     private void buttonCrear2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCrear2ActionPerformed
-        FormularioPacientes form = new FormularioPacientes(pacienteService, null);
-        getParent().add(form); // Abrir en el desktopPane
-        form.setVisible(true);
-        
-        int x = (getParent().getWidth() - form.getWidth()) / 2;
-        int y = (getParent().getHeight() - form.getHeight()) / 2;
-        form.setLocation(x, y);
+        if (formCrearPaciente != null && formCrearPaciente.isDisplayable()) {
+        // Traer la ventana adelante y seleccionar
+            try {
+                formCrearPaciente.toFront();
+                formCrearPaciente.setSelected(true);
+                formCrearPaciente.repaint();
+            } catch (java.beans.PropertyVetoException ex) {
+                // Captura de error si no se puede traer al frente
+            }
+            JOptionPane.showMessageDialog(this,
+                "Ya hay un formulario de creación abierto.",
+                "Formulario abierto", JOptionPane.WARNING_MESSAGE);
+            return;
+            }
+        formCrearPaciente = new FormularioPacientes(pacienteService, null);
+        getParent().add(formCrearPaciente);
+        formCrearPaciente.setVisible(true);
+
+        int x = (getParent().getWidth() - formCrearPaciente.getWidth()) / 2;
+        int y = (getParent().getHeight() - formCrearPaciente.getHeight()) / 2;
+        formCrearPaciente.setLocation(x, y);
     }//GEN-LAST:event_buttonCrear2ActionPerformed
     /**
      * Busca pacientes por cédula si el texto es numérico, o por nombre en otro caso.
@@ -409,8 +424,17 @@ public class ListaPaciente extends javax.swing.JInternalFrame {
      */
     private void buttonBuscar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBuscar2ActionPerformed
         String texto = textFieldBuscar2.getText().trim();
-        List<Paciente> resultados;
+        if (texto.isEmpty()) {
+            JOptionPane.showMessageDialog(
+                this,
+                "Por favor, introduzca la cédula o el nombre en el campo de búsqueda.",
+                "Campo vacío", JOptionPane.WARNING_MESSAGE
+            );
+            return;
+        }
 
+        
+        List<Paciente> resultados;
         if (texto.matches("\\d+")) {
             // Si es solo números, buscar por cédula
             Optional<Paciente> p = pacienteService.buscarPorCedula(texto);
@@ -434,6 +458,14 @@ public class ListaPaciente extends javax.swing.JInternalFrame {
                 p.getTelefono(),
                 p.getFechaNacimiento()
             });
+        }
+        
+        if (resultados.isEmpty()) {
+        JOptionPane.showMessageDialog(
+            this,
+            "No se encontró ningún paciente con ese criterio.",
+            "Sin resultados", JOptionPane.INFORMATION_MESSAGE
+        );
         }
     }//GEN-LAST:event_buttonBuscar2ActionPerformed
     /**

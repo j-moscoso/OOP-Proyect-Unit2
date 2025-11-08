@@ -229,14 +229,26 @@ public class ListaMedico extends javax.swing.JInternalFrame {
      * 
      * @param evt evento de acción
      */
+    private FormulariosMedicos formCrearMedico = null;
     private void buttonCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCrearActionPerformed
-        FormulariosMedicos form = new FormulariosMedicos(medicoService, null);
-        getParent().add(form); // Abrir en el desktopPane
-        form.setVisible(true);
-        
-        int x = (getParent().getWidth() - form.getWidth()) / 2;
-        int y = (getParent().getHeight() - form.getHeight()) / 2;
-        form.setLocation(x, y);
+        if (formCrearMedico != null && formCrearMedico.isDisplayable()) {
+            try {
+                formCrearMedico.toFront();
+                formCrearMedico.setSelected(true);
+            } catch (java.beans.PropertyVetoException ex) {
+                // Captura de error si no se puede traer al frente
+            }
+            JOptionPane.showMessageDialog(this,
+                "Ya hay un formulario de creación abierto.",
+                "Formulario abierto", JOptionPane.WARNING_MESSAGE);
+            return;
+            }
+        formCrearMedico = new FormulariosMedicos(medicoService, null);
+        getParent().add(formCrearMedico);
+        formCrearMedico.setVisible(true);
+        int x = (getParent().getWidth() - formCrearMedico.getWidth()) / 2;
+        int y = (getParent().getHeight() - formCrearMedico.getHeight()) / 2;
+        formCrearMedico.setLocation(x, y);
     }//GEN-LAST:event_buttonCrearActionPerformed
     /**
      * Busca médicos por cédula o nombre según el texto ingresado en el campo de búsqueda.
@@ -246,8 +258,14 @@ public class ListaMedico extends javax.swing.JInternalFrame {
      */
     private void buttonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBuscarActionPerformed
         String texto = textFieldBuscar.getText().trim();
+        if (texto.isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                "Por favor, ingrese la cédula o el nombre para buscar.",
+                "Campo vacío", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
         List<Medico> resultados;
-
         if (texto.matches("\\d+")) {
             // Si es solo números, buscar por cédula
             Optional<Medico> m = medicoService.buscarPorCedula(texto);
@@ -271,6 +289,12 @@ public class ListaMedico extends javax.swing.JInternalFrame {
                 m.getTelefono(),
                 m.getEspecialidad()
             });
+        }
+        
+        if (resultados.isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                "No se encontraron médicos con ese criterio.",
+                "Sin resultados", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_buttonBuscarActionPerformed
     /**
