@@ -7,6 +7,7 @@ package com.mycompany.appclinica.Presentation;
 import com.mycompany.appclinica.Services.CitaService;
 import com.mycompany.appclinica.Services.MedicoService;
 import com.mycompany.appclinica.Services.PacienteService;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -207,24 +208,56 @@ public class VentanaPrincipal extends javax.swing.JFrame {
      * 
      * @param evt evento de acción
      */
+    private ListaPaciente listaPacienteFrame = null;
     private void menuItemGestionPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemGestionPacienteActionPerformed
-        ListaPaciente listaPac = new ListaPaciente(pacienteService, medicoService, citaService); // Envia el servicio
-        desktopPane.add(listaPac);
-        listaPac.setVisible(true);
-        
-        int x = (desktopPane.getWidth() - listaPac.getWidth()) / 2;
-        int y = (desktopPane.getHeight() - listaPac.getHeight()) / 2;
-        listaPac.setLocation(x, y);
-    }//GEN-LAST:event_menuItemGestionPacienteActionPerformed
+        if (listaPacienteFrame != null && listaPacienteFrame.isDisplayable()) {
+            JOptionPane.showMessageDialog(
+                this,
+                "Ya existe una gestión de pacientes abierta. Se traerá al frente.",
+                "Gestión de Pacientes", 
+                JOptionPane.INFORMATION_MESSAGE
+            );
+            try {
+                listaPacienteFrame.toFront();
+                listaPacienteFrame.setSelected(true);
+            } catch (java.beans.PropertyVetoException ex) {
+                // Manejo opcional
+            }
+            return;
+        }
+        listaPacienteFrame = new ListaPaciente(pacienteService, medicoService, citaService);
+        desktopPane.add(listaPacienteFrame);
+        listaPacienteFrame.setVisible(true);
 
+        int x = (desktopPane.getWidth() - listaPacienteFrame.getWidth()) / 2;
+        int y = (desktopPane.getHeight() - listaPacienteFrame.getHeight()) / 2;
+        listaPacienteFrame.setLocation(x, y);
+    }//GEN-LAST:event_menuItemGestionPacienteActionPerformed
+    
+    private ListaMedico listaMedicoFrame = null;
     private void menuItemGestionMedicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemGestionMedicoActionPerformed
-        ListaMedico listaMed = new ListaMedico(medicoService);
-        desktopPane.add(listaMed);
-        listaMed.setVisible(true);
-        
-        int x = (desktopPane.getWidth() - listaMed.getWidth()) / 2;
-        int y = (desktopPane.getHeight() - listaMed.getHeight()) / 2;
-        listaMed.setLocation(x, y);
+        if (listaMedicoFrame != null && listaMedicoFrame.isDisplayable()) {
+            JOptionPane.showMessageDialog(
+                this,
+                "Ya existe una gestión de médicos abierta. Se traerá al frente.",
+                "Gestión de Médicos", 
+                JOptionPane.INFORMATION_MESSAGE
+            );
+            try {
+                listaMedicoFrame.toFront();
+                listaMedicoFrame.setSelected(true);
+            } catch (java.beans.PropertyVetoException ex) {
+                // Manejo opcional
+            }
+            return;
+        }
+        listaMedicoFrame = new ListaMedico(medicoService);
+        desktopPane.add(listaMedicoFrame);
+        listaMedicoFrame.setVisible(true);
+
+        int x = (desktopPane.getWidth() - listaMedicoFrame.getWidth()) / 2;
+        int y = (desktopPane.getHeight() - listaMedicoFrame.getHeight()) / 2;
+        listaMedicoFrame.setLocation(x, y);
     }//GEN-LAST:event_menuItemGestionMedicoActionPerformed
     /**
      * Acción para abrir el formulario de gestión de citas dentro del escritorio.
@@ -232,14 +265,31 @@ public class VentanaPrincipal extends javax.swing.JFrame {
      * 
      * @param evt evento de acción
      */
+    
+    private ListaCitas listaCitasFrame = null;
     private void menuItemGestionCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemGestionCitaActionPerformed
-        ListaCitas listaCit = new ListaCitas(citaService, medicoService, pacienteService);
-        desktopPane.add(listaCit);
-        listaCit.setVisible(true);
-        
-        int x = (desktopPane.getWidth() - listaCit.getWidth()) / 2;
-        int y = (desktopPane.getHeight() - listaCit.getHeight()) / 2;
-        listaCit.setLocation(x, y);
+        if (listaCitasFrame != null && listaCitasFrame.isDisplayable()) {
+            JOptionPane.showMessageDialog(
+                this,
+                "Ya existe una gestión de citas abierta. Se traerá al frente.",
+                "Gestión de Citas", 
+                JOptionPane.INFORMATION_MESSAGE
+            );
+            try {
+                listaCitasFrame.toFront();
+                listaCitasFrame.setSelected(true);
+            } catch (java.beans.PropertyVetoException ex) {
+                // Manejo opcional
+            }
+            return;
+        }
+        listaCitasFrame = new ListaCitas(citaService, medicoService, pacienteService);
+        desktopPane.add(listaCitasFrame);
+        listaCitasFrame.setVisible(true);
+
+        int x = (desktopPane.getWidth() - listaCitasFrame.getWidth()) / 2;
+        int y = (desktopPane.getHeight() - listaCitasFrame.getHeight()) / 2;
+        listaCitasFrame.setLocation(x, y);
     }//GEN-LAST:event_menuItemGestionCitaActionPerformed
 
     /**

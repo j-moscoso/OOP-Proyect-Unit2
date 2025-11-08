@@ -399,6 +399,7 @@ public class ListaPaciente extends javax.swing.JInternalFrame {
             try {
                 formCrearPaciente.toFront();
                 formCrearPaciente.setSelected(true);
+                formCrearPaciente.repaint();
             } catch (java.beans.PropertyVetoException ex) {
                 // Captura de error si no se puede traer al frente
             }
