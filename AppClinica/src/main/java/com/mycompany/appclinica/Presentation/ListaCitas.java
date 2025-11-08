@@ -19,19 +19,22 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  * Interfaz de usuario para mostrar y gestionar la lista de citas médicas.
- * Permite buscar, crear, editar, eliminar, y cambiar estado de las citas 
+ * Permite buscar, crear, editar, eliminar, y cambiar estado de las citas
  * mediante interacción con los servicios correspondientes.
- * 
+ *
  * @author Juan Moscoso y Slleider Rojas
  */
+
 public class ListaCitas extends javax.swing.JInternalFrame {
+
     private CitaService citaService;
     private MedicoService medicoService;
     private PacienteService pacienteService;
+
     /**
-     * Constructor de la ventana ListaCitas.
-     * Inicializa los servicios y componentes gráficos.
-     * 
+     * Constructor de la ventana ListaCitas. Inicializa los servicios y
+     * componentes gráficos.
+     *
      * @param citaService Servicio para gestión de citas
      * @param medicoService Servicio para gestión de médicos
      * @param pacienteService Servicio para gestión de pacientes
@@ -287,28 +290,71 @@ public class ListaCitas extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     /**
-     * Acción para crear una nueva cita.
-     * Abre el formulario de citas en modo creación centrado en la ventana principal.
-     * 
+     * Acción para crear una nueva cita. Abre el formulario de citas en modo
+     * creación centrado en la ventana principal.
+     *
      * @param evt evento de acción
      */
+    private FormularioCitas formCrearCita = null;
     private void buttomCrear3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttomCrear3ActionPerformed
-        FormularioCitas form = new FormularioCitas(this.pacienteService, this.medicoService, this.citaService, null);
-        getParent().add(form); // Abrir en el desktopPane
-        form.setVisible(true);
-        
-        int x = (getParent().getWidth() - form.getWidth()) / 2;
-        int y = (getParent().getHeight() - form.getHeight()) / 2;
-        form.setLocation(x, y);
+        if (formCrearCita != null && formCrearCita.isDisplayable()) {
+            try {
+                formCrearCita.toFront();
+                formCrearCita.setSelected(true);
+            } catch (java.beans.PropertyVetoException ex) {
+                // opcional: log
+            }
+            JOptionPane.showMessageDialog(this,
+                    "Ya hay un formulario de creación de cita abierto.",
+                    "Formulario abierto", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // Crear nueva instancia (modo crear)
+        formCrearCita = new FormularioCitas(this.pacienteService, this.medicoService, this.citaService, null);
+
+        // Limpiar referencia al cerrar para permitir abrir otro luego
+        formCrearCita.addInternalFrameListener(new javax.swing.event.InternalFrameAdapter() {
+            @Override
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent e) {
+                formCrearCita = null;
+                mostrarCitas(); // refrescar tabla al cerrar
+            }
+
+            @Override
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent e) {
+                formCrearCita = null;
+            }
+
+            private void mostrarCitas() {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+        });
+
+        // Abrir en el DesktopPane y centrar
+        javax.swing.JDesktopPane dp = getDesktopPane();
+        if (dp != null) {
+            dp.add(formCrearCita);
+        } else {
+            getParent().add(formCrearCita);
+        }
+        formCrearCita.setVisible(true);
+
+        java.awt.Container parent = formCrearCita.getParent();
+        if (parent != null) {
+            int x = (parent.getWidth() - formCrearCita.getWidth()) / 2;
+            int y = (parent.getHeight() - formCrearCita.getHeight()) / 2;
+            formCrearCita.setLocation(x, y);
+        }
     }//GEN-LAST:event_buttomCrear3ActionPerformed
 
     private void textFieldBuscar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldBuscar3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textFieldBuscar3ActionPerformed
     /**
-     * Método para mostrar una lista de citas en la tabla.
-     * Limpia la tabla y agrega las citas con sus datos principales.
-     * 
+     * Método para mostrar una lista de citas en la tabla. Limpia la tabla y
+     * agrega las citas con sus datos principales.
+     *
      * @param citas Lista de citas a mostrar
      */
     public void mostrarCitas(List<Cita> citas) {
@@ -327,19 +373,24 @@ public class ListaCitas extends javax.swing.JInternalFrame {
             });
         }
     }
+
     /**
      * Acción para buscar citas filtrando por cédula de paciente o médico.
      * Combina resultados sin duplicados y muestra en la tabla.
-     * 
+     *
      * @param evt evento de acción
-     */    
+     */
     private void buttonBuscar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBuscar3ActionPerformed
-          try {
-            String cedula = textFieldBuscar3.getText().trim();
+        try {
+            String cedula = textFieldBuscar3.getText() != null ? textFieldBuscar3.getText().trim() : "";
+
+            // Exigir cédula para buscar
             if (cedula.isEmpty()) {
-                mostrarCitas(citaService.listarTodas());
+                JOptionPane.showMessageDialog(this, "Ingresa la cédula para buscar.", "Falta cédula", JOptionPane.WARNING_MESSAGE);
                 return;
             }
+
+            // Si permites buscar por paciente o por médico con el mismo campo:
             List<Cita> citasPaciente = citaService.buscarPorPaciente(cedula);
             List<Cita> citasMedico = citaService.buscarPorMedico(cedula);
 
@@ -357,9 +408,9 @@ public class ListaCitas extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_buttonBuscar3ActionPerformed
     /**
-     * Acción para editar la cita seleccionada en la tabla.
-     * Abre el formulario de citas en modo edición si una cita está seleccionada.
-     * 
+     * Acción para editar la cita seleccionada en la tabla. Abre el formulario
+     * de citas en modo edición si una cita está seleccionada.
+     *
      * @param evt evento de acción
      */
     private void buttonEditar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditar3ActionPerformed
@@ -383,9 +434,9 @@ public class ListaCitas extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_buttonEditar3ActionPerformed
     /**
-     * Acción para eliminar la cita seleccionada.
-     * Muestra mensaje de confirmación y refresca la tabla.
-     * 
+     * Acción para eliminar la cita seleccionada. Muestra mensaje de
+     * confirmación y refresca la tabla.
+     *
      * @param evt evento de acción
      */
     private void buttonEliminar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEliminar3ActionPerformed
@@ -404,13 +455,13 @@ public class ListaCitas extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_buttonEliminar3ActionPerformed
     /**
-     * Acción para cancelar la cita seleccionada.
-     * Cambia estado y refresca la tabla si es posible.
-     * 
+     * Acción para cancelar la cita seleccionada. Cambia estado y refresca la
+     * tabla si es posible.
+     *
      * @param evt evento de acción
      */
     private void buttonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelarActionPerformed
-         try {
+        try {
             int fila = tableListaCitas.getSelectedRow();
             if (fila != -1) {
                 String idCita = tableListaCitas.getValueAt(fila, 0).toString();
@@ -429,9 +480,9 @@ public class ListaCitas extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_buttonCancelarActionPerformed
     /**
-     * Acción para confirmar la cita seleccionada.
-     * Cambia estado y refresca la tabla si es posible.
-     * 
+     * Acción para confirmar la cita seleccionada. Cambia estado y refresca la
+     * tabla si es posible.
+     *
      * @param evt evento de acción
      */
     private void buttonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConfirmarActionPerformed
@@ -454,9 +505,9 @@ public class ListaCitas extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_buttonConfirmarActionPerformed
     /**
-     * Acción para completar la cita seleccionada.
-     * Cambia estado y refresca la tabla si es posible.
-     * 
+     * Acción para completar la cita seleccionada. Cambia estado y refresca la
+     * tabla si es posible.
+     *
      * @param evt evento de acción
      */
     private void buttonCompletar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCompletar2ActionPerformed
@@ -480,16 +531,16 @@ public class ListaCitas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buttonCompletar2ActionPerformed
     /**
      * Acción para cerrar la ventana de lista de citas.
-     * 
+     *
      * @param evt evento de acción
      */
     private void jButtonSalir2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalir2ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButtonSalir2ActionPerformed
     /**
-     * Acción para marcar la cita como 'no asistió'.
-     * Cambia estado y refresca la tabla; avisa si no fue posible.
-     * 
+     * Acción para marcar la cita como 'no asistió'. Cambia estado y refresca la
+     * tabla; avisa si no fue posible.
+     *
      * @param evt evento de acción
      */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -512,20 +563,20 @@ public class ListaCitas extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
     /**
-     * Acción para refrescar la lista total de citas.
-     * Actualiza la tabla con todas las citas registradas.
-     * 
+     * Acción para refrescar la lista total de citas. Actualiza la tabla con
+     * todas las citas registradas.
+     *
      * @param evt evento de acción
      */
     private void buttonRefrescarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRefrescarActionPerformed
-       try {
+        try {
             List<Cita> todas = citaService.listarTodas();
             // Usa el mismo método utilitario para mostrar todas las citas en la tabla
             mostrarCitas(todas);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "No se pudo refrescar la tabla de citas: " + ex.getMessage());
         }
-        
+
     }//GEN-LAST:event_buttonRefrescarActionPerformed
 
 

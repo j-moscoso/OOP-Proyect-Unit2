@@ -20,15 +20,15 @@ import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import javax.swing.JOptionPane;
 
-
 /**
- * Formulario para crear o editar citas médicas dentro de la aplicación.
- * Permite seleccionar paciente mediante cédula, médico según especialidad,
- * fecha, hora, motivo y estado de la cita.
- * Usa servicios para gestión de pacientes, médicos y citas para validar y guardar datos.
- * 
+ * Formulario para crear o editar citas médicas dentro de la aplicación. Permite
+ * seleccionar paciente mediante cédula, médico según especialidad, fecha, hora,
+ * motivo y estado de la cita. Usa servicios para gestión de pacientes, médicos
+ * y citas para validar y guardar datos.
+ *
  * @author Juan Moscoso y Slleider Rojas
  */
+
 public class FormularioCitas extends javax.swing.JInternalFrame {
     private MedicoService medicoService;
     private CitaService citaService;
@@ -324,7 +324,7 @@ public class FormularioCitas extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+
     private void llenarCamposEditar() {
         if (cita != null) {
             txtCedula.setEditable(false);
@@ -332,23 +332,27 @@ public class FormularioCitas extends javax.swing.JInternalFrame {
             txtFecha.setText(cita.getFecha().toLocalDate().toString());
             txtHora.setText(cita.getFecha().toLocalTime().toString());
             txtMotivo.setText(cita.getMotivo());
-            comboBoxMedico.setSelectedItem(cita.getMedico().getNombre()); 
+            comboBoxMedico.setSelectedItem(cita.getMedico().getNombre());
             comboBoxEspecialidades.setSelectedItem(cita.getMedico().getEspecialidad());
             comboBoxEstado.setSelectedItem(cita.getEstado());
-        }    
+        }
     }
+
     /**
-     * Carga las especialidades médicas en el comboBoxEspecialidades desde la enumeración.
+     * Carga las especialidades médicas en el comboBoxEspecialidades desde la
+     * enumeración.
      */
-    
+
     private void cargarEspecialidades() {
         comboBoxEspecialidades.removeAllItems();
         for (EnumEspecialidad especialidad : EnumEspecialidad.values()) {
             comboBoxEspecialidades.addItem(especialidad);
         }
     }
+
     /**
-     * Carga los estados posibles de una cita en el comboBoxEstado desde la enumeración.
+     * Carga los estados posibles de una cita en el comboBoxEstado desde la
+     * enumeración.
      */
     private void cargarEstados() {
         comboBoxEstado.removeAllItems(); // limpia el combo antes de llenar
@@ -356,136 +360,145 @@ public class FormularioCitas extends javax.swing.JInternalFrame {
             comboBoxEstado.addItem(estado);
         }
     }
+
     /**
      * Acción del botón cancelar para cerrar el formulario sin guardar cambios.
-     * 
+     *
      * @param evt evento de acción
      */
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
-    
+
     private void txtHoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtHoraActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtHoraActionPerformed
-     /**
-     * Acción para actualizar la lista de médicos mostrada al cambiar la especialidad seleccionada.
-     * Consulta al servicio de médicos y actualiza comboBoxMedico.
-     * 
+    /**
+     * Acción para actualizar la lista de médicos mostrada al cambiar la
+     * especialidad seleccionada. Consulta al servicio de médicos y actualiza
+     * comboBoxMedico.
+     *
      * @param evt evento generado al seleccionar especialidad
      */
     private void comboBoxEspecialidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxEspecialidadesActionPerformed
         try {
-        EnumEspecialidad especialidadSeleccionada = (EnumEspecialidad) comboBoxEspecialidades.getSelectedItem();
-        List<Medico> medicosFiltrados = medicoService.buscarPorEspecialidad(especialidadSeleccionada);
-        comboBoxMedico.removeAllItems();
-        for (Medico m : medicosFiltrados) {
-            comboBoxMedico.addItem(m);
+            EnumEspecialidad especialidadSeleccionada = (EnumEspecialidad) comboBoxEspecialidades.getSelectedItem();
+            List<Medico> medicosFiltrados = medicoService.buscarPorEspecialidad(especialidadSeleccionada);
+            comboBoxMedico.removeAllItems();
+            for (Medico m : medicosFiltrados) {
+                comboBoxMedico.addItem(m);
+            }
+        } catch (HeadlessException ex) {
+            JOptionPane.showMessageDialog(this, "Error al actualizar médicos: " + ex.getMessage());
         }
-        if (medicosFiltrados.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "No hay médicos para esa especialidad");
-        }
-    } catch (HeadlessException ex) {
-        JOptionPane.showMessageDialog(this, "Error al actualizar médicos: " + ex.getMessage());
-    }
     }//GEN-LAST:event_comboBoxEspecialidadesActionPerformed
     /**
-     * Acción para guardar los datos ingresados, validando los campos antes.
-     * Si es nueva cita, crea y agenda; si es edición, actualiza la cita existente.
+     * Acción para guardar los datos ingresados, validando los campos antes. Si
+     * es nueva cita, crea y agenda; si es edición, actualiza la cita existente.
      * Muestra mensajes de éxito o error según corresponda.
-     * 
+     *
      * @param evt evento de acción
      */
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         try {
-        String cedula = txtCedula.getText().trim();
-        Medico medicoSeleccionado = (Medico) comboBoxMedico.getSelectedItem();
-        String fecha = txtFecha.getText().trim();
-        String hora = txtHora.getText().trim();
-        EnumEstadoCita estado = (EnumEstadoCita) comboBoxEstado.getSelectedItem();
-        String motivo = txtMotivo.getText().trim();
+            String cedula = txtCedula.getText().trim();
+            String fecha = txtFecha.getText().trim();
+            String hora = txtHora.getText().trim();
+            EnumEstadoCita estado = (EnumEstadoCita) comboBoxEstado.getSelectedItem();
+            String motivo = txtMotivo.getText().trim();
 
-        // Validaciones básicas
-        if (cedula.isEmpty() || medicoSeleccionado == null || fecha.isEmpty() || hora.isEmpty() || estado == null || motivo.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        // Buscar paciente
-        Optional<Paciente> pacienteOpt = pacienteService.buscarPorCedula(cedula);
-        if (!pacienteOpt.isPresent()) {
-            JOptionPane.showMessageDialog(this, "No existe un paciente con esa cédula.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        // Conversión segura de fecha y hora
-        LocalDateTime fechaHora;
-        try {
-            String fechaHoraStr = fecha + " " + hora;
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-            fechaHora = LocalDateTime.parse(fechaHoraStr, formatter);
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Formato de fecha/hora inválido.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        Paciente paciente = pacienteOpt.get();
-        boolean exito;
-        if (this.cita == null) {
-            // Crear nueva cita
-            Cita nuevaCita = new Cita(paciente, medicoSeleccionado, motivo, fechaHora);
-            nuevaCita.setEstado(estado);
-            try {
-                exito = citaService.agendarCita(nuevaCita);
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, "Error al registrar la cita: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            if (comboBoxMedico.getItemCount() == 0) {
+                JOptionPane.showMessageDialog(this, "No hay médicos para la especialidad seleccionada.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            if (exito) {
-                JOptionPane.showMessageDialog(this, "Cita registrada exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                this.dispose();
-            } else {
-                JOptionPane.showMessageDialog(this, "No se pudo registrar la cita. Verifica que no esté duplicada.", "Error", JOptionPane.ERROR_MESSAGE);
-            }
-        } else {
-            // Editar cita existente
-            cita.setPaciente(paciente);
-            cita.setMedico(medicoSeleccionado);
-            cita.setMotivo(motivo);
-            cita.setFecha(fechaHora);
-            cita.setEstado(estado);
-            try {
-                exito = citaService.actualizarCita(cita.getId(), cita);
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, "Error al editar la cita: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            Medico medicoSeleccionado = (Medico) comboBoxMedico.getSelectedItem();
+            if (medicoSeleccionado == null) {
+                JOptionPane.showMessageDialog(this, "Debes seleccionar un médico.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            if (exito) {
-                JOptionPane.showMessageDialog(this, "Cita editada exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                this.dispose();
-            } else {
-                JOptionPane.showMessageDialog(this, "No se pudo editar la cita.", "Error", JOptionPane.ERROR_MESSAGE);
+
+            // Validaciones básicas
+            if (cedula.isEmpty() || fecha.isEmpty() || hora.isEmpty() || estado == null || motivo.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
             }
+
+            // Buscar paciente
+            Optional<Paciente> pacienteOpt = pacienteService.buscarPorCedula(cedula);
+            if (!pacienteOpt.isPresent()) {
+                JOptionPane.showMessageDialog(this, "No existe un paciente con esa cédula.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Conversión segura de fecha y hora
+            LocalDateTime fechaHora;
+            try {
+                String fechaHoraStr = fecha + " " + hora;
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+                fechaHora = LocalDateTime.parse(fechaHoraStr, formatter);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Formato de fecha/hora inválido (use yyyy-MM-dd y HH:mm).", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            Paciente paciente = pacienteOpt.get();
+            boolean exito;
+
+            if (this.cita == null) {
+                // Crear nueva cita
+                Cita nuevaCita = new Cita(paciente, medicoSeleccionado, motivo, fechaHora);
+                nuevaCita.setEstado(estado);
+                try {
+                    exito = citaService.agendarCita(nuevaCita);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(this, "Error al registrar la cita: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                if (exito) {
+                    JOptionPane.showMessageDialog(this, "Cita registrada exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(this, "No se pudo registrar la cita. Verifica que no esté duplicada.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                // Editar cita existente
+                cita.setPaciente(paciente);
+                cita.setMedico(medicoSeleccionado);
+                cita.setMotivo(motivo);
+                cita.setFecha(fechaHora);
+                cita.setEstado(estado);
+                try {
+                    exito = citaService.actualizarCita(cita.getId(), cita);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(this, "Error al editar la cita: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                if (exito) {
+                    JOptionPane.showMessageDialog(this, "Cita editada exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(this, "No se pudo editar la cita.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        } catch (HeadlessException ex) {
+            JOptionPane.showMessageDialog(this, "Ocurrió un error inesperado: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-    } catch (Exception ex) {
-        JOptionPane.showMessageDialog(this, "Ocurrió un error inesperado: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-    }
     }//GEN-LAST:event_btnGuardarActionPerformed
     /**
-     * Acción del botón limpiar para borrar los campos del formulario y resetear selecciones.
-     * En modo edición, mantiene bloqueado el campo cédula.
-     * 
+     * Acción del botón limpiar para borrar los campos del formulario y resetear
+     * selecciones. En modo edición, mantiene bloqueado el campo cédula.
+     *
      * @param evt evento de acción
      */
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         if (cita == null) {
-        txtCedula.setText("");  
-        txtCedula.setEditable(true);
+            txtCedula.setText("");
+            txtCedula.setEditable(true);
         }
         txtFecha.setText("");
         txtHora.setText("");
         txtMotivo.setText("");
 
-        
         if (comboBoxEspecialidades.getItemCount() > 0) {
             comboBoxEspecialidades.setSelectedIndex(0);
         }
