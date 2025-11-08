@@ -400,10 +400,13 @@ public class ListaPaciente extends javax.swing.JInternalFrame {
                 formCrearPaciente.toFront();
                 formCrearPaciente.setSelected(true);
             } catch (java.beans.PropertyVetoException ex) {
-                // Puede ocurrir si otra ventana está en modo modal
+                // Captura de error si no se puede traer al frente
             }
+            JOptionPane.showMessageDialog(this,
+                "Ya hay un formulario de creación abierto.",
+                "Formulario abierto", JOptionPane.WARNING_MESSAGE);
             return;
-        }
+            }
         formCrearPaciente = new FormularioPacientes(pacienteService, null);
         getParent().add(formCrearPaciente);
         formCrearPaciente.setVisible(true);
