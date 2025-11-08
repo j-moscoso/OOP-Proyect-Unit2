@@ -8,6 +8,7 @@ import com.mycompany.appclinica.Models.EnumEspecialidad;
 import com.mycompany.appclinica.Models.Medico;
 import com.mycompany.appclinica.Services.MedicoService;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 
 /**
  * Formulario para crear o editar médicos.
@@ -285,20 +286,86 @@ public class FormulariosMedicos extends javax.swing.JInternalFrame {
      * @param evt evento de acción
      */
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        Medico m = new Medico(
-            txtCedula.getText(),
-            txtNombre1.getText(),
-            txtApellido.getText(),
-            (EnumEspecialidad) comboBoxEspecialidades.getSelectedItem(),
-            txtTelefono.getText()
-        );
-        
-        if (medico == null){
-            medicoService.agregarMedico(m);
-        } else { 
-            medicoService.actualizarMedico(m.getCedula(),m);
+        try {
+        String cedula = txtCedula.getText().trim();
+        String nombre = txtNombre1.getText().trim();
+        String apellido = txtApellido.getText().trim();
+        String telefono = txtTelefono.getText().trim();
+        EnumEspecialidad especialidad = (EnumEspecialidad) comboBoxEspecialidades.getSelectedItem();
+
+        // Validar campos obligatorios
+        if (cedula.isEmpty() || nombre.isEmpty() || apellido.isEmpty() || telefono.isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                "Todos los campos son obligatorios.",
+                "Validación",
+                JOptionPane.WARNING_MESSAGE);
+            return;
         }
-        this.dispose();                     
+
+        // Validar cédula: solo números, 8-11 dígitos
+        if (!cedula.matches("\\d{8,11}")) {
+            JOptionPane.showMessageDialog(this,
+                "La cédula debe contener entre 8 y 11 dígitos numéricos.",
+                "Error en cédula",
+                JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Validar nombre y apellido: solo letras y espacios
+        if (!nombre.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+")) {
+            JOptionPane.showMessageDialog(this,
+                "El nombre solo debe contener letras y espacios.",
+                "Error en nombre",
+                JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (!apellido.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+")) {
+            JOptionPane.showMessageDialog(this,
+                "El apellido solo debe contener letras y espacios.",
+                "Error en apellido",
+                JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Validar teléfono: solo números
+        if (!telefono.matches("\\d+")) {
+            JOptionPane.showMessageDialog(this,
+                "El teléfono debe contener solo números.",
+                "Error en teléfono",
+                JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        Medico m = new Medico(cedula, nombre, apellido, especialidad, telefono);
+
+        boolean éxito;
+        if (medico == null) {
+            éxito = medicoService.agregarMedico(m);
+            if (!éxito) {
+                JOptionPane.showMessageDialog(this,
+                    "No se pudo agregar el médico. Verifique que la cédula no exista y que los datos sean válidos.",
+                    "Error al agregar",
+                    JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        } else {
+            éxito = medicoService.actualizarMedico(m.getCedula(), m);
+            if (!éxito) {
+                JOptionPane.showMessageDialog(this,
+                    "No se pudo actualizar el médico. Puede que el médico no exista o los datos sean inválidos.",
+                    "Error al actualizar",
+                    JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+        this.dispose();
+
+    } catch (Exception ex) {
+        JOptionPane.showMessageDialog(this,
+            "Ocurrió un error inesperado: " + ex.getMessage(),
+            "Error",
+            JOptionPane.ERROR_MESSAGE);
+    }                 
     }//GEN-LAST:event_btnGuardarActionPerformed
     /**
      * Evento vacío para acción en el comboBox de especialidades. 
