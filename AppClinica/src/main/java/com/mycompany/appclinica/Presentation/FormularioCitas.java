@@ -14,6 +14,7 @@ import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import com.mycompany.appclinica.Services.MedicoService;
 import com.mycompany.appclinica.Services.PacienteService;
+import java.awt.HeadlessException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
@@ -374,12 +375,19 @@ public class FormularioCitas extends javax.swing.JInternalFrame {
      * @param evt evento generado al seleccionar especialidad
      */
     private void comboBoxEspecialidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxEspecialidadesActionPerformed
+        try {
         EnumEspecialidad especialidadSeleccionada = (EnumEspecialidad) comboBoxEspecialidades.getSelectedItem();
         List<Medico> medicosFiltrados = medicoService.buscarPorEspecialidad(especialidadSeleccionada);
         comboBoxMedico.removeAllItems();
         for (Medico m : medicosFiltrados) {
-            comboBoxMedico.addItem(m); // 
+            comboBoxMedico.addItem(m);
         }
+        if (medicosFiltrados.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No hay médicos para esa especialidad");
+        }
+    } catch (HeadlessException ex) {
+        JOptionPane.showMessageDialog(this, "Error al actualizar médicos: " + ex.getMessage());
+    }
     }//GEN-LAST:event_comboBoxEspecialidadesActionPerformed
     /**
      * Acción para guardar los datos ingresados, validando los campos antes.
@@ -389,6 +397,7 @@ public class FormularioCitas extends javax.swing.JInternalFrame {
      * @param evt evento de acción
      */
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        try {
         String cedula = txtCedula.getText().trim();
         Medico medicoSeleccionado = (Medico) comboBoxMedico.getSelectedItem();
         String fecha = txtFecha.getText().trim();
@@ -401,7 +410,6 @@ public class FormularioCitas extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-
         // Buscar paciente
         Optional<Paciente> pacienteOpt = pacienteService.buscarPorCedula(cedula);
         if (!pacienteOpt.isPresent()) {
@@ -409,18 +417,29 @@ public class FormularioCitas extends javax.swing.JInternalFrame {
             return;
         }
 
-        String fechaHoraStr = fecha + " " + hora;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        LocalDateTime fechaHora = LocalDateTime.parse(fechaHoraStr, formatter);
+        // Conversión segura de fecha y hora
+        LocalDateTime fechaHora;
+        try {
+            String fechaHoraStr = fecha + " " + hora;
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            fechaHora = LocalDateTime.parse(fechaHoraStr, formatter);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Formato de fecha/hora inválido.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
         Paciente paciente = pacienteOpt.get();
-
+        boolean exito;
         if (this.cita == null) {
-            // Modo crear
+            // Crear nueva cita
             Cita nuevaCita = new Cita(paciente, medicoSeleccionado, motivo, fechaHora);
             nuevaCita.setEstado(estado);
-            boolean exito = citaService.agendarCita(nuevaCita);
-
+            try {
+                exito = citaService.agendarCita(nuevaCita);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Error al registrar la cita: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
             if (exito) {
                 JOptionPane.showMessageDialog(this, "Cita registrada exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                 this.dispose();
@@ -428,14 +447,18 @@ public class FormularioCitas extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "No se pudo registrar la cita. Verifica que no esté duplicada.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         } else {
-            // Modo editar
+            // Editar cita existente
             cita.setPaciente(paciente);
             cita.setMedico(medicoSeleccionado);
             cita.setMotivo(motivo);
             cita.setFecha(fechaHora);
             cita.setEstado(estado);
-            boolean exito = citaService.actualizarCita(cita.getId(), cita); 
-
+            try {
+                exito = citaService.actualizarCita(cita.getId(), cita);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Error al editar la cita: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
             if (exito) {
                 JOptionPane.showMessageDialog(this, "Cita editada exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
                 this.dispose();
@@ -443,6 +466,9 @@ public class FormularioCitas extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "No se pudo editar la cita.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
+    } catch (Exception ex) {
+        JOptionPane.showMessageDialog(this, "Ocurrió un error inesperado: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
     }//GEN-LAST:event_btnGuardarActionPerformed
     /**
      * Acción del botón limpiar para borrar los campos del formulario y resetear selecciones.
