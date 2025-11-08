@@ -8,6 +8,7 @@ import com.mycompany.appclinica.Models.Cita;
 import com.mycompany.appclinica.Services.CitaService;
 import com.mycompany.appclinica.Services.MedicoService;
 import com.mycompany.appclinica.Services.PacienteService;
+import java.awt.HeadlessException;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -333,23 +334,27 @@ public class ListaCitas extends javax.swing.JInternalFrame {
      * @param evt evento de acción
      */    
     private void buttonBuscar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonBuscar3ActionPerformed
-        String cedula = textFieldBuscar3.getText().trim();
-        if (cedula.isEmpty()) {
-            // Si no hay cédula mostrar todas las citas o un mensaje
-            mostrarCitas(citaService.listarTodas());
-            return;
+          try {
+            String cedula = textFieldBuscar3.getText().trim();
+            if (cedula.isEmpty()) {
+                mostrarCitas(citaService.listarTodas());
+                return;
+            }
+            List<Cita> citasPaciente = citaService.buscarPorPaciente(cedula);
+            List<Cita> citasMedico = citaService.buscarPorMedico(cedula);
+
+            Set<Cita> citasCombinadas = new LinkedHashSet<>();
+            citasCombinadas.addAll(citasPaciente);
+            citasCombinadas.addAll(citasMedico);
+
+            if (citasCombinadas.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "No hay citas asociadas a ese dato.");
+            } else {
+                mostrarCitas(new ArrayList<>(citasCombinadas));
+            }
+        } catch (HeadlessException ex) {
+            JOptionPane.showMessageDialog(this, "Error al buscar citas: " + ex.getMessage());
         }
-        // Buscar citas por paciente y por médico
-        List<Cita> citasPaciente = citaService.buscarPorPaciente(cedula);
-        List<Cita> citasMedico = citaService.buscarPorMedico(cedula);
-
-        // Combinar resultados sin duplicados
-        Set<Cita> citasCombinadas = new LinkedHashSet<>();
-        citasCombinadas.addAll(citasPaciente);
-        citasCombinadas.addAll(citasMedico);
-
-        // Mostrar en tabla
-        mostrarCitas(new ArrayList<>(citasCombinadas));
     }//GEN-LAST:event_buttonBuscar3ActionPerformed
     /**
      * Acción para editar la cita seleccionada en la tabla.
@@ -358,20 +363,23 @@ public class ListaCitas extends javax.swing.JInternalFrame {
      * @param evt evento de acción
      */
     private void buttonEditar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEditar3ActionPerformed
-        int fila = tableListaCitas.getSelectedRow();
-        if (fila != -1) {
-            String idCita = tableListaCitas.getValueAt(fila, 0).toString();
-            Optional<Cita> citaOpt = citaService.buscarPorId(idCita);
-            if (citaOpt.isPresent()) {
-                // Abrir FormularioCitas en modo editar
-                FormularioCitas form = new FormularioCitas(pacienteService, medicoService, citaService, citaOpt.get()); 
-                this.getParent().add(form); // O tu método para mostrar el formulario
-                form.setVisible(true);
+        try {
+            int fila = tableListaCitas.getSelectedRow();
+            if (fila != -1) {
+                String idCita = tableListaCitas.getValueAt(fila, 0).toString();
+                Optional<Cita> citaOpt = citaService.buscarPorId(idCita);
+                if (citaOpt.isPresent()) {
+                    FormularioCitas form = new FormularioCitas(pacienteService, medicoService, citaService, citaOpt.get());
+                    this.getParent().add(form);
+                    form.setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(this, "No se encontró la cita para editar");
+                }
             } else {
-                JOptionPane.showMessageDialog(this, "No se encontró la cita para editar");
+                JOptionPane.showMessageDialog(this, "Seleccione una cita para editar");
             }
-        } else {
-            JOptionPane.showMessageDialog(this, "Seleccione una cita para editar");
+        } catch (HeadlessException ex) {
+            JOptionPane.showMessageDialog(this, "Error al editar la cita: " + ex.getMessage());
         }
     }//GEN-LAST:event_buttonEditar3ActionPerformed
     /**
@@ -381,15 +389,18 @@ public class ListaCitas extends javax.swing.JInternalFrame {
      * @param evt evento de acción
      */
     private void buttonEliminar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEliminar3ActionPerformed
-        int fila = tableListaCitas.getSelectedRow();
-        if (fila != -1) {
-            // Obtener el valor como String y luego conviértelo a int
-            String idCitaStr = tableListaCitas.getValueAt(fila, 0).toString();
-            citaService.eliminarCita(idCitaStr);
-            JOptionPane.showMessageDialog(this, "Cita eliminada");
-            buttonRefrescarActionPerformed(evt);
-        } else {
-            JOptionPane.showMessageDialog(this, "Seleccione una cita para eliminar");
+        try {
+            int fila = tableListaCitas.getSelectedRow();
+            if (fila != -1) {
+                String idCitaStr = tableListaCitas.getValueAt(fila, 0).toString();
+                citaService.eliminarCita(idCitaStr);
+                JOptionPane.showMessageDialog(this, "Cita eliminada");
+                buttonRefrescarActionPerformed(evt);
+            } else {
+                JOptionPane.showMessageDialog(this, "Seleccione una cita para eliminar");
+            }
+        } catch (HeadlessException ex) {
+            JOptionPane.showMessageDialog(this, "Error al eliminar la cita: " + ex.getMessage());
         }
     }//GEN-LAST:event_buttonEliminar3ActionPerformed
     /**
@@ -399,18 +410,22 @@ public class ListaCitas extends javax.swing.JInternalFrame {
      * @param evt evento de acción
      */
     private void buttonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCancelarActionPerformed
-         int fila = tableListaCitas.getSelectedRow();
-        if (fila != -1) {
-            String idCita = tableListaCitas.getValueAt(fila, 0).toString();
-            boolean exito = citaService.cancelarCita(idCita);
-            if (exito) {
-                JOptionPane.showMessageDialog(this, "Cita cancelada correctamente");
-                buttonRefrescarActionPerformed(evt);
+         try {
+            int fila = tableListaCitas.getSelectedRow();
+            if (fila != -1) {
+                String idCita = tableListaCitas.getValueAt(fila, 0).toString();
+                boolean exito = citaService.cancelarCita(idCita);
+                if (exito) {
+                    JOptionPane.showMessageDialog(this, "Cita cancelada correctamente");
+                    buttonRefrescarActionPerformed(evt);
+                } else {
+                    JOptionPane.showMessageDialog(this, "No se pudo cancelar la cita");
+                }
             } else {
-                JOptionPane.showMessageDialog(this, "No se pudo cancelar la cita");
+                JOptionPane.showMessageDialog(this, "Seleccione una cita para cancelar");
             }
-        } else {
-            JOptionPane.showMessageDialog(this, "Seleccione una cita para cancelar");
+        } catch (HeadlessException ex) {
+            JOptionPane.showMessageDialog(this, "Error al cancelar la cita: " + ex.getMessage());
         }
     }//GEN-LAST:event_buttonCancelarActionPerformed
     /**
@@ -420,18 +435,22 @@ public class ListaCitas extends javax.swing.JInternalFrame {
      * @param evt evento de acción
      */
     private void buttonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConfirmarActionPerformed
-        int fila = tableListaCitas.getSelectedRow();
-        if (fila != -1) {
-            String idCita = tableListaCitas.getValueAt(fila, 0).toString();
-            boolean exito = citaService.confirmarCita(idCita);
-            if (exito) {
-                JOptionPane.showMessageDialog(this, "Cita confirmada correctamente");
-                buttonRefrescarActionPerformed(evt);
+        try {
+            int fila = tableListaCitas.getSelectedRow();
+            if (fila != -1) {
+                String idCita = tableListaCitas.getValueAt(fila, 0).toString();
+                boolean exito = citaService.confirmarCita(idCita);
+                if (exito) {
+                    JOptionPane.showMessageDialog(this, "Cita confirmada correctamente");
+                    buttonRefrescarActionPerformed(evt);
+                } else {
+                    JOptionPane.showMessageDialog(this, "No se pudo confirmar la cita");
+                }
             } else {
-                JOptionPane.showMessageDialog(this, "No se pudo confirmar la cita");
+                JOptionPane.showMessageDialog(this, "Seleccione una cita para confirmar");
             }
-        } else {
-            JOptionPane.showMessageDialog(this, "Seleccione una cita para confirmar");
+        } catch (HeadlessException ex) {
+            JOptionPane.showMessageDialog(this, "Error al confirmar la cita: " + ex.getMessage());
         }
     }//GEN-LAST:event_buttonConfirmarActionPerformed
     /**
@@ -441,18 +460,22 @@ public class ListaCitas extends javax.swing.JInternalFrame {
      * @param evt evento de acción
      */
     private void buttonCompletar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCompletar2ActionPerformed
-         int fila = tableListaCitas.getSelectedRow();
-        if (fila != -1) {
-            String idCita = tableListaCitas.getValueAt(fila, 0).toString();
-            boolean exito = citaService.completarCita(idCita);
-            if (exito) {
-                JOptionPane.showMessageDialog(this, "Cita completada correctamente");
-                buttonRefrescarActionPerformed(evt);
+        try {
+            int fila = tableListaCitas.getSelectedRow();
+            if (fila != -1) {
+                String idCita = tableListaCitas.getValueAt(fila, 0).toString();
+                boolean exito = citaService.completarCita(idCita);
+                if (exito) {
+                    JOptionPane.showMessageDialog(this, "Cita completada correctamente");
+                    buttonRefrescarActionPerformed(evt);
+                } else {
+                    JOptionPane.showMessageDialog(this, "No se pudo completar la cita");
+                }
             } else {
-                JOptionPane.showMessageDialog(this, "No se pudo completar la cita");
+                JOptionPane.showMessageDialog(this, "Seleccione una cita para completar");
             }
-        } else {
-            JOptionPane.showMessageDialog(this, "Seleccione una cita para completar");
+        } catch (HeadlessException ex) {
+            JOptionPane.showMessageDialog(this, "Error al completar la cita: " + ex.getMessage());
         }
     }//GEN-LAST:event_buttonCompletar2ActionPerformed
     /**
@@ -470,18 +493,22 @@ public class ListaCitas extends javax.swing.JInternalFrame {
      * @param evt evento de acción
      */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        int fila = tableListaCitas.getSelectedRow();
-        if (fila != -1) {
-            String idCita = tableListaCitas.getValueAt(fila, 0).toString();
-            boolean exito = citaService.marcarNoAsistio(idCita);
-            if (exito) {
-                JOptionPane.showMessageDialog(this, "La cita fue marcada como 'no asistió'");
-                buttonRefrescarActionPerformed(evt);
+        try {
+            int fila = tableListaCitas.getSelectedRow();
+            if (fila != -1) {
+                String idCita = tableListaCitas.getValueAt(fila, 0).toString();
+                boolean exito = citaService.marcarNoAsistio(idCita);
+                if (exito) {
+                    JOptionPane.showMessageDialog(this, "La cita fue marcada como 'no asistió'");
+                    buttonRefrescarActionPerformed(evt);
+                } else {
+                    JOptionPane.showMessageDialog(this, "No se pudo actualizar el estado de la cita");
+                }
             } else {
-                JOptionPane.showMessageDialog(this, "No se pudo actualizar el estado de la cita");
+                JOptionPane.showMessageDialog(this, "Seleccione una cita para marcar como no asistió");
             }
-        } else {
-            JOptionPane.showMessageDialog(this, "Seleccione una cita para marcar como no asistió");
+        } catch (HeadlessException ex) {
+            JOptionPane.showMessageDialog(this, "Error al actualizar el estado de la cita: " + ex.getMessage());
         }
     }//GEN-LAST:event_jButton1ActionPerformed
     /**
@@ -491,9 +518,14 @@ public class ListaCitas extends javax.swing.JInternalFrame {
      * @param evt evento de acción
      */
     private void buttonRefrescarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonRefrescarActionPerformed
-       List<Cita> todas = citaService.listarTodas();
-        // Usa el mismo método utilitario para mostrar todas las citas en la tabla
-        mostrarCitas(todas);
+       try {
+            List<Cita> todas = citaService.listarTodas();
+            // Usa el mismo método utilitario para mostrar todas las citas en la tabla
+            mostrarCitas(todas);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "No se pudo refrescar la tabla de citas: " + ex.getMessage());
+        }
+        
     }//GEN-LAST:event_buttonRefrescarActionPerformed
 
 
