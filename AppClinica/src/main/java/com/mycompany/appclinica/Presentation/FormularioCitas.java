@@ -367,9 +367,15 @@ public class FormularioCitas extends javax.swing.JInternalFrame {
      * enumeración.
      */
     private void cargarEstados() {
-        comboBoxEstado.removeAllItems(); // limpia el combo antes de llenar
-        for (EnumEstadoCita estado : EnumEstadoCita.values()) {
-            comboBoxEstado.addItem(estado);
+        comboBoxEstado.removeAllItems();
+        if (this.cita == null) {
+            // SOLO opción pendiente en modo CREAR
+            comboBoxEstado.addItem(EnumEstadoCita.PENDIENTE);
+        } else {
+            // TODAS las opciones en modo EDITAR
+            for (EnumEstadoCita estado : EnumEstadoCita.values()) {
+                comboBoxEstado.addItem(estado);
+            }
         }
     }
 
