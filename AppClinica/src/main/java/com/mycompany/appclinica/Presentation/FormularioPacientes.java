@@ -345,11 +345,11 @@ public class FormularioPacientes extends javax.swing.JInternalFrame {
         }
 
         // Validar teléfono: entero
-        if (!telefono.matches("\\d+")) {
+        if (!telefono.matches("3\\d{9}")) {
             JOptionPane.showMessageDialog(
                 this,
-                "El teléfono debe ser un número entero.",
-                "Error de teléfono",
+                "El teléfono debe tener 10 dígitos, empezar en 3 y contener solo números.",
+                "Error en teléfono",
                 JOptionPane.ERROR_MESSAGE
             );
             return;
