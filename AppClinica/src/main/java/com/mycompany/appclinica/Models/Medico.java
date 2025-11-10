@@ -212,6 +212,7 @@ public class Medico {
     public int hashCode() {
         return cedula != null ? cedula.hashCode():0;
     }
+
 }
     
 

@@ -6,6 +6,8 @@ package com.mycompany.appclinica.Services;
 
 import com.mycompany.appclinica.Models.Medico;
 import com.mycompany.appclinica.Models.EnumEspecialidad;
+import com.mycompany.appclinica.Persistence.MedicoTxtDAO;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -20,13 +22,28 @@ import java.util.stream.Collectors;
  */
 public class MedicoService {
 
+    private final MedicoTxtDAO dao = new MedicoTxtDAO();
     private final List<Medico> medicos;
 
     /**
      * Constructor que inicializa la lista de médicos.
      */
     public MedicoService() {
-        this.medicos = new ArrayList<>();
+        List<Medico> cargados;
+        try {
+            cargados = dao.cargar();
+        } catch (IOException e) {
+            cargados = new ArrayList<>();
+        }
+        this.medicos = cargados;
+    }
+
+    public void persistir() {
+        try {
+            dao.guardar(medicos);
+        } catch (IOException e) {
+            System.err.println("Error guardando médicos: " + e.getMessage());
+        }
     }
 
     /**
@@ -42,13 +59,20 @@ public class MedicoService {
             return false;
         }
 
-        // Validar que no exista un médico con la misma cédula
-        if (buscarPorCedula(medico.getCedula()).isPresent()) {
-            System.err.println("Error: Ya existe un medico con la cédula " + medico.getCedula());
+        try {
+            List<String> todasCedulas = dao.obtenerTodasLasCedulasIncluidoInvalidos();
+            if (todasCedulas.contains(medico.getCedula())) {
+                System.err.println("Error: Ya existe un medico (válido o invalido) con la cedula " + medico.getCedula());
+                return false;
+            }
+        } catch (IOException e) {
+            System.err.println("No se pudo revisar duplicidad de cedula: " + e.getMessage());
             return false;
         }
 
-        return medicos.add(medico);
+        boolean res = medicos.add(medico);
+        persistir();
+        return res;
     }
 
     /**
@@ -131,6 +155,7 @@ public class MedicoService {
             medico.setApellido(medicoActualizado.getApellido());
             medico.setEspecialidad(medicoActualizado.getEspecialidad());
             medico.setTelefono(medicoActualizado.getTelefono());
+            persistir();
             return true;
         }
 
@@ -147,10 +172,11 @@ public class MedicoService {
     public boolean eliminarMedico(String cedula) {
         boolean eliminado = medicos.removeIf(m -> m.getCedula().equals(cedula));
 
-        if (!eliminado) {
+        if (eliminado) {
+            persistir();
+        } else {
             System.err.println("Error: No se encontró un médico con la cédula " + cedula);
         }
-
         return eliminado;
     }
 

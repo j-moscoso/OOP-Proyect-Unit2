@@ -291,14 +291,26 @@ public class ListaCitas extends javax.swing.JInternalFrame {
      * 
      * @param evt evento de acción
      */
+    private FormularioCitas formCrearCita = null;
     private void buttomCrear3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttomCrear3ActionPerformed
-        FormularioCitas form = new FormularioCitas(this.pacienteService, this.medicoService, this.citaService, null);
-        getParent().add(form); // Abrir en el desktopPane
-        form.setVisible(true);
-        
-        int x = (getParent().getWidth() - form.getWidth()) / 2;
-        int y = (getParent().getHeight() - form.getHeight()) / 2;
-        form.setLocation(x, y);
+        if (formCrearCita != null && formCrearCita.isDisplayable()) {
+            try {
+                formCrearCita.toFront();
+                formCrearCita.setSelected(true);
+            } catch (java.beans.PropertyVetoException ex) {
+                // Captura de error si no se puede traer al frente
+            }
+            JOptionPane.showMessageDialog(this,
+                "Ya hay un formulario de creación abierto.",
+                "Formulario abierto", JOptionPane.WARNING_MESSAGE);
+            return;
+            }
+        formCrearCita = new FormularioCitas(this.pacienteService, this.medicoService, this.citaService, null);
+        getParent().add(formCrearCita);
+        formCrearCita.setVisible(true);
+        int x = (getParent().getWidth() - formCrearCita.getWidth()) / 2;
+        int y = (getParent().getHeight() - formCrearCita.getHeight()) / 2;
+        formCrearCita.setLocation(x, y);
     }//GEN-LAST:event_buttomCrear3ActionPerformed
 
     private void textFieldBuscar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldBuscar3ActionPerformed

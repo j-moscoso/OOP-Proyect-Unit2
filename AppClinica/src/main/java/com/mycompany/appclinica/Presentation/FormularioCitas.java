@@ -19,25 +19,27 @@ import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import javax.swing.JOptionPane;
 
-
 /**
- * Formulario para crear o editar citas médicas dentro de la aplicación.
- * Permite seleccionar paciente mediante cédula, médico según especialidad,
- * fecha, hora, motivo y estado de la cita.
- * Usa servicios para gestión de pacientes, médicos y citas para validar y guardar datos.
- * 
+ * Formulario para crear o editar citas médicas dentro de la aplicación. Permite
+ * seleccionar paciente mediante cédula, médico según especialidad, fecha, hora,
+ * motivo y estado de la cita. Usa servicios para gestión de pacientes, médicos
+ * y citas para validar y guardar datos.
+ *
  * @author Juan Moscoso y Slleider Rojas
  */
+
 public class FormularioCitas extends javax.swing.JInternalFrame {
+
     private MedicoService medicoService;
     private CitaService citaService;
     private PacienteService pacienteService;
     private Cita cita;
-    
+
     /**
-     * Constructor que inicializa el formulario con los servicios y la cita (si es edición).
-     * Configura combos de especialidades y estados, y si hay cita rellena los campos para edición.
-     * 
+     * Constructor que inicializa el formulario con los servicios y la cita (si
+     * es edición). Configura combos de especialidades y estados, y si hay cita
+     * rellena los campos para edición.
+     *
      * @param pacienteService Servicio para gestión de pacientes
      * @param medicoService Servicio para gestión de médicos
      * @param citaService Servicio para gestión de citas
@@ -47,7 +49,7 @@ public class FormularioCitas extends javax.swing.JInternalFrame {
         this.citaService = citaService;
         this.medicoService = medicoService;
         this.pacienteService = pacienteService;
-        this.cita = cita; 
+        this.cita = cita;
         initComponents();
         cargarEstados();
         cargarEspecialidades();
@@ -55,11 +57,12 @@ public class FormularioCitas extends javax.swing.JInternalFrame {
             llenarCamposEditar();
         }
     }
+
     /**
      * Llena los campos del formulario con los datos de la cita para edición.
      * Establece editable en falso el campo de cédula para evitar modificación.
-    */
-     
+     */
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -323,7 +326,7 @@ public class FormularioCitas extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+
     private void llenarCamposEditar() {
         if (cita != null) {
             txtCedula.setEditable(false);
@@ -331,61 +334,81 @@ public class FormularioCitas extends javax.swing.JInternalFrame {
             txtFecha.setText(cita.getFecha().toLocalDate().toString());
             txtHora.setText(cita.getFecha().toLocalTime().toString());
             txtMotivo.setText(cita.getMotivo());
-            comboBoxMedico.setSelectedItem(cita.getMedico().getNombre()); 
+            comboBoxMedico.setSelectedItem(cita.getMedico().getNombre());
             comboBoxEspecialidades.setSelectedItem(cita.getMedico().getEspecialidad());
             comboBoxEstado.setSelectedItem(cita.getEstado());
-        }    
+        }
     }
+
     /**
-     * Carga las especialidades médicas en el comboBoxEspecialidades desde la enumeración.
+     * Carga las especialidades médicas en el comboBoxEspecialidades desde la
+     * enumeración.
      */
-    
+    private void cargarMedicosPorEspecialidad(EnumEspecialidad especialidad) {
+        comboBoxMedico.removeAllItems();
+        List<Medico> medicosFiltrados = medicoService.buscarPorEspecialidad(especialidad);
+        for (Medico m : medicosFiltrados) {
+            comboBoxMedico.addItem(m); // Si usas `toString()`, muestra nombre completo
+        }
+    }
+
     private void cargarEspecialidades() {
         comboBoxEspecialidades.removeAllItems();
         for (EnumEspecialidad especialidad : EnumEspecialidad.values()) {
             comboBoxEspecialidades.addItem(especialidad);
         }
-    }
-    /**
-     * Carga los estados posibles de una cita en el comboBoxEstado desde la enumeración.
-     */
-    private void cargarEstados() {
-        comboBoxEstado.removeAllItems(); // limpia el combo antes de llenar
-        for (EnumEstadoCita estado : EnumEstadoCita.values()) {
-            comboBoxEstado.addItem(estado);
+        if (comboBoxEspecialidades.getItemCount() > 0) {
+            cargarMedicosPorEspecialidad((EnumEspecialidad) comboBoxEspecialidades.getItemAt(0));
         }
     }
+
+    /**
+     * Carga los estados posibles de una cita en el comboBoxEstado desde la
+     * enumeración.
+     */
+    private void cargarEstados() {
+        comboBoxEstado.removeAllItems();
+        if (this.cita == null) {
+            // SOLO opción pendiente en modo CREAR
+            comboBoxEstado.addItem(EnumEstadoCita.PENDIENTE);
+        } else {
+            // TODAS las opciones en modo EDITAR
+            for (EnumEstadoCita estado : EnumEstadoCita.values()) {
+                comboBoxEstado.addItem(estado);
+            }
+        }
+    }
+
     /**
      * Acción del botón cancelar para cerrar el formulario sin guardar cambios.
-     * 
+     *
      * @param evt evento de acción
      */
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
-    
+
     private void txtHoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtHoraActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtHoraActionPerformed
-     /**
-     * Acción para actualizar la lista de médicos mostrada al cambiar la especialidad seleccionada.
-     * Consulta al servicio de médicos y actualiza comboBoxMedico.
-     * 
+    /**
+     * Acción para actualizar la lista de médicos mostrada al cambiar la
+     * especialidad seleccionada. Consulta al servicio de médicos y actualiza
+     * comboBoxMedico.
+     *
      * @param evt evento generado al seleccionar especialidad
      */
     private void comboBoxEspecialidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxEspecialidadesActionPerformed
         EnumEspecialidad especialidadSeleccionada = (EnumEspecialidad) comboBoxEspecialidades.getSelectedItem();
-        List<Medico> medicosFiltrados = medicoService.buscarPorEspecialidad(especialidadSeleccionada);
-        comboBoxMedico.removeAllItems();
-        for (Medico m : medicosFiltrados) {
-            comboBoxMedico.addItem(m); // 
+        if (especialidadSeleccionada != null) {
+            cargarMedicosPorEspecialidad(especialidadSeleccionada);
         }
     }//GEN-LAST:event_comboBoxEspecialidadesActionPerformed
     /**
-     * Acción para guardar los datos ingresados, validando los campos antes.
-     * Si es nueva cita, crea y agenda; si es edición, actualiza la cita existente.
+     * Acción para guardar los datos ingresados, validando los campos antes. Si
+     * es nueva cita, crea y agenda; si es edición, actualiza la cita existente.
      * Muestra mensajes de éxito o error según corresponda.
-     * 
+     *
      * @param evt evento de acción
      */
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
@@ -434,7 +457,7 @@ public class FormularioCitas extends javax.swing.JInternalFrame {
             cita.setMotivo(motivo);
             cita.setFecha(fechaHora);
             cita.setEstado(estado);
-            boolean exito = citaService.actualizarCita(cita.getId(), cita); 
+            boolean exito = citaService.actualizarCita(cita.getId(), cita);
 
             if (exito) {
                 JOptionPane.showMessageDialog(this, "Cita editada exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
@@ -445,21 +468,20 @@ public class FormularioCitas extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
     /**
-     * Acción del botón limpiar para borrar los campos del formulario y resetear selecciones.
-     * En modo edición, mantiene bloqueado el campo cédula.
-     * 
+     * Acción del botón limpiar para borrar los campos del formulario y resetear
+     * selecciones. En modo edición, mantiene bloqueado el campo cédula.
+     *
      * @param evt evento de acción
      */
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         if (cita == null) {
-        txtCedula.setText("");  
-        txtCedula.setEditable(true);
+            txtCedula.setText("");
+            txtCedula.setEditable(true);
         }
         txtFecha.setText("");
         txtHora.setText("");
         txtMotivo.setText("");
 
-        
         if (comboBoxEspecialidades.getItemCount() > 0) {
             comboBoxEspecialidades.setSelectedIndex(0);
         }

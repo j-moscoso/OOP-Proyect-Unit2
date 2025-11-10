@@ -328,11 +328,13 @@ public class FormulariosMedicos extends javax.swing.JInternalFrame {
         }
 
         // Validar teléfono: solo números
-        if (!telefono.matches("\\d+")) {
-            JOptionPane.showMessageDialog(this,
-                "El teléfono debe contener solo números.",
+        if (!telefono.matches("3\\d{9}")) {
+            JOptionPane.showMessageDialog(
+                this,
+                "El teléfono debe tener 10 dígitos, empezar en 3 y contener solo números.",
                 "Error en teléfono",
-                JOptionPane.ERROR_MESSAGE);
+                JOptionPane.ERROR_MESSAGE
+            );
             return;
         }
 
