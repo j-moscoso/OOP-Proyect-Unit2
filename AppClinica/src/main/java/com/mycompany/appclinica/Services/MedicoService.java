@@ -59,9 +59,14 @@ public class MedicoService {
             return false;
         }
 
-        // Validar que no exista un médico con la misma cédula
-        if (buscarPorCedula(medico.getCedula()).isPresent()) {
-            System.err.println("Error: Ya existe un medico con la cédula " + medico.getCedula());
+        try {
+            List<String> todasCedulas = dao.obtenerTodasLasCedulasIncluidoInvalidos();
+            if (todasCedulas.contains(medico.getCedula())) {
+                System.err.println("Error: Ya existe un medico (válido o invalido) con la cedula " + medico.getCedula());
+                return false;
+            }
+        } catch (IOException e) {
+            System.err.println("No se pudo revisar duplicidad de cedula: " + e.getMessage());
             return false;
         }
 

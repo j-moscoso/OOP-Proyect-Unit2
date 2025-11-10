@@ -47,7 +47,7 @@ public class CitaService {
         }
         this.citas = cargadas;
     }
-    
+
     public void persistir() {
         try {
             dao.guardar(citas);
@@ -55,6 +55,7 @@ public class CitaService {
             System.err.println("Error guardando citas: " + e.getMessage());
         }
     }
+
     /**
      * Agenda una nueva cita en el sistema. Valida que el paciente y el médico
      * existan, y que no haya conflictos de horario.
@@ -113,15 +114,41 @@ public class CitaService {
      * @return true si hay conflicto, false si está disponible
      */
     private boolean existeConflictoHorario(String cedulaMedico, LocalDateTime fecha, String idCitaExcluir) {
-        return citas.stream()
-                .filter(c -> !c.getId().equals(idCitaExcluir)) // Excluir la cita actual si se está actualizando
-                .filter(c -> c.getMedico().getCedula().equals(cedulaMedico))
-                .filter(c -> c.getEstado() != EnumEstadoCita.CANCELADA)
-                .anyMatch(c -> {
-                    LocalDateTime inicioCita = c.getFecha();
-                    LocalDateTime finCita = c.getFecha().plusMinutes(30);
-                    return !fecha.isBefore(inicioCita) && fecha.isBefore(finCita);
-                });
+        // Verificar en citas válidas cargadas en memoria
+        boolean conflictoValido = citas.stream()
+            .filter(c -> !c.getId().equals(idCitaExcluir))
+            .filter(c -> c.getMedico().getCedula().equals(cedulaMedico))
+            .filter(c -> c.getEstado() != EnumEstadoCita.CANCELADA)
+            .anyMatch(c -> {
+                LocalDateTime inicioCita = c.getFecha();
+                LocalDateTime finCita = inicioCita.plusMinutes(30);
+                return !fecha.isBefore(inicioCita) && fecha.isBefore(finCita);
+            });
+
+        if (conflictoValido) return true;
+
+        // Verificar en las líneas inválidas cargadas del archivo
+        for (String linea : dao.lineasInvalidas) {
+            String[] partes = linea.split(",");
+            if (partes.length < 4) continue;
+            String cedMedicoInv = partes[2].trim();
+            String fechaTexto = partes[3].trim();
+
+            if (cedMedicoInv.equals(cedulaMedico)) {
+                try {
+                    LocalDateTime fechaInv = LocalDateTime.parse(fechaTexto);
+                    LocalDateTime finInv = fechaInv.plusMinutes(30);
+                    if (!fecha.isBefore(fechaInv) && fecha.isBefore(finInv)) {
+                        return true;
+                    }
+                } catch (Exception e) {
+                    // Si la fecha no se puede analizar, es seguro asumir conflicto para evitar duplicados erróneos
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -242,7 +269,7 @@ public class CitaService {
         if (citaOpt.isPresent()) {
             boolean ok = citaOpt.get().cancelar();
             if (ok) {
-                persistir(); 
+                persistir();
             }
             return ok;
         }
@@ -334,7 +361,9 @@ public class CitaService {
     public boolean eliminarCita(String id) {
         boolean eliminado = citas.removeIf(c -> c.getId().equals(id));
 
-        if (!eliminado) {
+        if (eliminado) {
+            persistir();
+        } else {
             System.err.println("Error: No se encontró una cita con el ID " + id);
         }
 

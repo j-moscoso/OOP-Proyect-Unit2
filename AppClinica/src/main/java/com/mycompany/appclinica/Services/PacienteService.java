@@ -56,13 +56,18 @@ public class PacienteService {
      */
     public boolean agregarPaciente(Paciente paciente) {
         if (paciente == null || !paciente.esValido()) {
-            System.err.println("Error: El paciente es nulo o no es válido.");
+            System.err.println("Error: El paciente es nulo o no es valido.");
             return false;
         }
 
-        // Validar que no exista un paciente con la misma cédula
-        if (buscarPorCedula(paciente.getCedula()).isPresent()) {
-            System.err.println("Error: Ya existe un paciente con la cédula " + paciente.getCedula());
+        try {
+            List<String> todasCedulas = dao.obtenerTodasLasCedulasIncluidoInvalidos();
+            if (todasCedulas.contains(paciente.getCedula())) {
+                System.err.println("Error: Ya existe un paciente (valido o invalido) con la cedula " + paciente.getCedula());
+                return false;
+            }
+        } catch (IOException e) {
+            System.err.println("No se pudo revisar duplicidad de cedula: " + e.getMessage());
             return false;
         }
 
