@@ -264,7 +264,7 @@ public class ListaPaciente extends javax.swing.JInternalFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(46, 71, 86));
-        jLabel1.setText("Ingrese la cédula:");
+        jLabel1.setText("Ingrese la cédula, nombre o apellido del paciente:");
 
         jPanel1.setBackground(new java.awt.Color(30, 107, 117));
 

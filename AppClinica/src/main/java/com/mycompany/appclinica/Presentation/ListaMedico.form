@@ -227,7 +227,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="56" green="47" red="2e" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Ingrese la c&#xe9;dula:"/>
+        <Property name="text" type="java.lang.String" value="Ingrese la c&#xe9;dula, nombre o apellido del m&#xe9;dico:"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JPanel" name="jPanel1">

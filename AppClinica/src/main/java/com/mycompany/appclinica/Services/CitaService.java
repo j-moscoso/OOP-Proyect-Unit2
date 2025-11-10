@@ -95,6 +95,8 @@ public class CitaService {
             return false;
         }
 
+        cita.setId(generarNuevoId());
+        
         boolean res = citas.add(cita);
         if (res) {
             persistir();
@@ -102,6 +104,22 @@ public class CitaService {
         return res;
     }
 
+    private String generarNuevoId() {
+        int maxId = 0;
+        for (Cita c : citas) {
+            try {
+                String[] partes = c.getId().split("-");
+                int num = Integer.parseInt(partes[1]);
+                if (num > maxId) {
+                    maxId = num;
+                }
+            } catch (Exception e) {
+                // ignorar errores de formato
+            }
+        }
+        return String.format("CITA-%04d", maxId + 1);
+    }
+    
     /**
      * Verifica si existe un conflicto de horario para un médico en una fecha
      * específica. Se considera conflicto si hay otra cita en la misma hora (con

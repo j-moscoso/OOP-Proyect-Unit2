@@ -35,7 +35,6 @@ public class Cita {
      * @param fecha Fecha y hora programada
      */
     public Cita(Paciente paciente, Medico medico, String motivo, LocalDateTime fecha) {
-        this.id = generarIdCita();
         this.paciente = paciente;
         this.medico = medico;
         this.motivo = motivo;
@@ -79,15 +78,6 @@ public class Cita {
         } catch (NumberFormatException e) {
             // ID no es del formato esperado, no actualizar contador
         }
-    }
-
-    /**
-     * Genera un ID único para la cita en formato CITA-XXXX
-     *
-     * @return ID generado
-     */
-    private String generarIdCita() {
-        return String.format("CITA-%04d", contadorCitas++);
     }
 
     /**

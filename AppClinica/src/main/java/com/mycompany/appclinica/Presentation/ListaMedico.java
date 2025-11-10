@@ -134,7 +134,7 @@ public class ListaMedico extends javax.swing.JInternalFrame {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(46, 71, 86));
-        jLabel2.setText("Ingrese la cédula:");
+        jLabel2.setText("Ingrese la cédula, nombre o apellido del médico:");
 
         jPanel1.setBackground(new java.awt.Color(30, 107, 117));
 

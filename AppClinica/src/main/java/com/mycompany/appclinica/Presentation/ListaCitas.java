@@ -181,7 +181,7 @@ public class ListaCitas extends javax.swing.JInternalFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(46, 71, 86));
-        jLabel1.setText("Ingrese su cédula:");
+        jLabel1.setText("Ingrese la cédula del médico o paciente:");
 
         jPanel1.setBackground(new java.awt.Color(30, 107, 117));
 
